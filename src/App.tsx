@@ -3,6 +3,7 @@ import './App.css'
 
 import ActivityFeed from './pages/ActivityFeed';
 import Activity from './pages/Activity';
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<ActivityFeed />} />
           <Route path="/activity/:id" element={<Activity />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
     </Router>
