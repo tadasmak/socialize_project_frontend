@@ -1,31 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import ActivityFeed from './pages/ActivityFeed';
 
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Router>
+      <nav className="p-4 flex gap-4 bg-gray-100 shadow">
+        <Link to="/" className="text-blue-500 hover:underline">Activities</Link>
+      </nav>
 
-export default App
+      <main className="p-4">
+        <Routes>
+          <Route path="/" element={<ActivityFeed />} />
+        </Routes>
+      </main>
+    </Router>
+  );
+};
+
+export default App;
