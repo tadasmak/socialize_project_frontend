@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css'
 
 import ActivityFeed from './pages/ActivityFeed';
+import Activity from './pages/Activity';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <main className="p-4">
         <Routes>
           <Route path="/" element={<ActivityFeed />} />
+          <Route path="/activity/:id" element={<Activity />} />
         </Routes>
       </main>
     </Router>
