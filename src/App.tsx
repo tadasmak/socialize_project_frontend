@@ -20,7 +20,7 @@ const App = () => {
           <Route path="/activity/:id" element={<Activity />} />
           <Route path="/activity/new" element={<ActivityCreation />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/user/:id" element={<User />} />
+          <Route path="/user/:username" element={<User />} />
         </Routes>
       </main>
     </Router>
