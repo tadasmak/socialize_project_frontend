@@ -5,6 +5,7 @@ import ActivityFeed from './pages/ActivityFeed';
 import Activity from './pages/Activity';
 import ActivityCreation from './pages/ActivityCreation';
 import Profile from './pages/Profile';
+import User from './pages/User';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/activity/:id" element={<Activity />} />
           <Route path="/activity/new" element={<ActivityCreation />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/user/:id" element={<User />} />
         </Routes>
       </main>
     </Router>
