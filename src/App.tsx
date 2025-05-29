@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
 
 import ActivityFeed from './pages/ActivityFeed';
@@ -7,12 +7,12 @@ import ActivityCreation from './pages/ActivityCreation';
 import Profile from './pages/Profile';
 import User from './pages/User';
 
+import Navigation from './components/Navigation';
+
 const App = () => {
   return (
     <Router>
-      <nav className="p-4 flex gap-4 bg-gray-100 shadow">
-        <Link to="/" className="text-blue-500 hover:underline">Activities</Link>
-      </nav>
+      <Navigation />
 
       <main className="p-4">
         <Routes>
