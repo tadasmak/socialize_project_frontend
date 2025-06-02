@@ -15,7 +15,7 @@ export default function Navigation() {
                         <div className="text-xl/10 font-bold ml-2">Social Eyes</div>
                     </div>
                     {navigationItems.map((item) => (
-                        <Link to={item.href} key={item.name} className={`flex h-full items-center px-4 text-md text-white font-medium ${item.current ? 'border-b-3 border-solid border-yellow-700' : 'hover:bg-slate-700'}`}>{item.name}</Link>
+                        <div key={item.name} className={`flex h-full items-center px-4 text-md text-white font-medium ${item.current ? 'border-b-3 border-solid border-yellow-700' : 'hover:bg-slate-700'}`}>{item.name}</div>
                     ))}
                 </Link>
                 <div className="flex items-center">
