@@ -17,10 +17,10 @@ const App = () => {
       <main className="mx-auto mt-12 max-w-6xl px-2 sm:px-6 lg:px-8">
         <Routes>
           <Route path="/" element={<ActivityFeed />} />
-          <Route path="/activity/:id" element={<Activity />} />
-          <Route path="/activity/new" element={<ActivityCreation />} />
+          <Route path="/activities/:id" element={<Activity />} />
+          <Route path="/activities/new" element={<ActivityCreation />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/user/:username" element={<User />} />
+          <Route path="/users/:username" element={<User />} />
         </Routes>
       </main>
     </Router>
