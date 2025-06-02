@@ -40,7 +40,7 @@ const ActivityFeed: React.FC = () => {
 
             <div className="mt-6">
                 {activities.map((activity) => (
-                   <Link to={`/api/v1/activities/${activity.id}`} key={activity.id} className="block border rounded-lg mb-2 p-4">
+                   <Link to={`/activities/${activity.id}`} key={activity.id} className="block border rounded-lg mb-2 p-4">
                         <h2 className="font-semibold text-2xl">{activity.title}</h2>
                         <p>{activity.description}</p>
                         <small className="text-yellow-700">{new Date(activity.start_time).toLocaleString()}</small>
