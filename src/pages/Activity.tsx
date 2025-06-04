@@ -4,7 +4,20 @@ import { useParams } from 'react-router-dom';
 interface ActivityType {
     title: string;
     description: string;
+    location: string;
     start_time: string;
+    max_participants: number;
+    minimum_age: number;
+    maximum_age: number;
+    creator: {
+        id: string;
+        username: string;
+    }
+    participants: Array<{
+        id: number;
+        username: string;
+        age: number;
+    }>
 }
 
 const Activity = () => {
@@ -28,10 +41,23 @@ const Activity = () => {
         <div>
             <small className="text-yellow-700">Activity</small>
 
-            <h1 className="text-xl font-bold">{activity.title}</h1>
-            <p>{activity.description}</p>
-            <span className="font-semibold">Start time: </span>
-            <small className="text-yellow-700">{new Date(activity.start_time).toLocaleString()}</small>
+            <h1 className="text-xl font-bold mb-1">{activity.title}</h1>
+            <p className="mb-2">{activity.description}</p>
+            <p><span className="text-yellow-700">Location: </span>{activity.location}</p>
+            <p><span className="text-yellow-700">Max Participants: </span><span className="font-semibold">{activity.max_participants}</span></p>
+            <p><span className="text-yellow-700">Age Range: </span>{activity.minimum_age} - {activity.maximum_age}</p>
+            <p><span className="text-yellow-700">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
+
+            <div className="mt-4">
+                <h2 className="text-lg font-semibold">Creator: <span className="text-yellow-700">{activity.creator.username}</span></h2>
+            </div>
+
+            <div className="mt-4">
+                <h2 className="text-lg font-semibold">Participants:</h2>
+                {activity.participants.map((participant) => (
+                    <p key={participant.id} className="text-yellow-700">{participant.username}</p>
+                ))}
+            </div>
         </div>
     );
 };
