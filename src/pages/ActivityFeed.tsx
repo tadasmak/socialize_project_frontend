@@ -7,6 +7,7 @@ type Activity = {
     description: string;
     location: string;
     start_time: string;
+    participants_count: number;
     max_participants: number;
     minimum_age: number;
     maximum_age: number;
@@ -49,7 +50,7 @@ const ActivityFeed: React.FC = () => {
                         <h2 className="font-semibold text-2xl mb-1">{activity.title}</h2>
                         <p className="mb-2">{activity.description}</p>
                         <p><span className="text-yellow-700">Location: </span>{activity.location}</p>
-                        <p><span className="text-yellow-700">Max Participants: </span><span className="font-semibold">{activity.max_participants}</span></p>
+                        <p><span className="text-yellow-700">Participants: </span><span className="font-semibold">{activity.participants_count}/{activity.max_participants}</span></p>
                         <p><span className="text-yellow-700">Age Range: </span>{activity.minimum_age} - {activity.maximum_age}</p>
                         <p><span className="text-yellow-700">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
                     </Link> 
