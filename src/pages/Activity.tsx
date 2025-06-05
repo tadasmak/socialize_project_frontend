@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 interface ActivityType {
     title: string;
@@ -49,13 +49,13 @@ const Activity = () => {
             <p><span className="text-yellow-700">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
 
             <div className="mt-4">
-                <h2 className="text-lg font-semibold">Creator: <span className="text-yellow-700">{activity.creator.username}</span></h2>
+                <h2 className="text-lg font-semibold">Creator: <Link to={`/users/${activity.creator.username}`} className="text-yellow-700">{activity.creator.username}</Link></h2>
             </div>
 
             <div className="mt-4">
                 <h2 className="text-lg font-semibold">Participants:</h2>
                 {activity.participants.map((participant) => (
-                    <p key={participant.id} className="text-yellow-700">{participant.username}</p>
+                    <Link to={`/users/${participant.username}`} key={participant.id} className="text-yellow-700">{participant.username}</Link>
                 ))}
             </div>
         </div>
