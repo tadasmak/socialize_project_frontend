@@ -55,7 +55,7 @@ const Activity = () => {
             <div className="mt-4">
                 <h2 className="text-lg font-semibold">Participants:</h2>
                 {activity.participants.map((participant) => (
-                    <Link to={`/users/${participant.username}`} key={participant.id}><span className="text-yellow-700">{participant.username}</span>{participant.username === activity.creator.username && ' (creator)'}</Link>
+                    <Link to={`/users/${participant.username}`} key={participant.id} className="block"><span className="text-yellow-700">{participant.username}</span>{participant.username === activity.creator.username && ' (creator)'}</Link>
                 ))}
             </div>
         </div>
