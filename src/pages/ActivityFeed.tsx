@@ -46,7 +46,7 @@ const ActivityFeed: React.FC = () => {
 
             <div className="mt-6">
                 {activities.map((activity) => (
-                   <Link to={`/activities/${activity.id}`} key={activity.id} className="block border rounded-lg mb-2 p-4">
+                   <Link to={`/activities/${activity.id}`} key={activity.id} className="activity-container block rounded-lg mb-2 p-4">
                         <h2 className="font-semibold text-2xl mb-1">{activity.title}</h2>
                         <p className="mb-2">{activity.description}</p>
                         <p><span className="text-yellow-700">Location: </span>{activity.location}</p>
