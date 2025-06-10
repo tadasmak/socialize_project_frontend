@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
 
+import Home from './pages/Home';
 import ActivityFeed from './pages/ActivityFeed';
 import Activity from './pages/Activity';
 import ActivityCreation from './pages/ActivityCreation';
@@ -16,7 +17,8 @@ const App = () => {
 
       <main className="mx-auto mt-12 max-w-6xl px-2 sm:px-6 lg:px-8">
         <Routes>
-          <Route path="/" element={<ActivityFeed />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/activities" element={<ActivityFeed />} />
           <Route path="/activities/:id" element={<Activity />} />
           <Route path="/activities/new" element={<ActivityCreation />} />
           <Route path="/profile" element={<Profile />} />
