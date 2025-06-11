@@ -44,19 +44,19 @@ const ActivityFeed: React.FC = () => {
             <h1 className="text-5xl font-bold">Activity Feed</h1>
             <p className="text-xl mt-6">This is the activity page. You can find activities here that you can choose to participate in.</p>
 
-            <div className="mt-6 grid grid-cols-2 gap-4">
+            <div className="mt-6 grid justify-center grid-cols-1 lg:grid-cols-2 gap-4">
                 {activities.map((activity) => (
-                   <Link to={`/activities/${activity.id}`} key={activity.id} className="activity-container flex rounded-lg mb-2 px-4 py-2">
-                        <div className="flex items-center h-full aspect-square mr-4">
-                            <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-full h-48 object-cover" />
+                   <Link to={`/activities/${activity.id}`} key={activity.id} className="activity-container flex max-w-180 rounded-lg mb-2 px-4 py-2">
+                        <div className="flex items-center w-1/3 min-w-48 aspect-square mr-4">
+                            <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-full object-cover" />
                         </div>
-                        <div className="flex-grow p-2">
-                            <h2 className="font-semibold text-2xl mb-1">{activity.title}</h2>
-                            <p className="mb-2">{activity.description}</p>
-                            <p><span className="text-yellow-700">Location: </span>{activity.location}</p>
+                        <div className="p-2 w-2/3 overflow-hidden">
+                            <h2 className="font-semibold truncate text-2xl mb-1">{activity.title}</h2>
+                            <p className="truncate mb-2">{activity.description}</p>
+                            <p className="truncate"><span className="text-yellow-700">Location: </span>{activity.location}</p>
                             <p><span className="text-yellow-700">Participants: </span><span className="font-semibold">{activity.participants_count}/{activity.max_participants}</span></p>
                             <p><span className="text-yellow-700">Age Range: </span>{activity.minimum_age} - {activity.maximum_age}</p>
-                            <p><span className="text-yellow-700">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
+                            <p className="truncate"><span className="text-yellow-700">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
                         </div>
                     </Link> 
                 ))}
