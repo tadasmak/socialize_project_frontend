@@ -46,13 +46,18 @@ const ActivityFeed: React.FC = () => {
 
             <div className="mt-6">
                 {activities.map((activity) => (
-                   <Link to={`/activities/${activity.id}`} key={activity.id} className="activity-container block rounded-lg mb-2 p-4">
-                        <h2 className="font-semibold text-2xl mb-1">{activity.title}</h2>
-                        <p className="mb-2">{activity.description}</p>
-                        <p><span className="text-yellow-700">Location: </span>{activity.location}</p>
-                        <p><span className="text-yellow-700">Participants: </span><span className="font-semibold">{activity.participants_count}/{activity.max_participants}</span></p>
-                        <p><span className="text-yellow-700">Age Range: </span>{activity.minimum_age} - {activity.maximum_age}</p>
-                        <p><span className="text-yellow-700">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
+                   <Link to={`/activities/${activity.id}`} key={activity.id} className="activity-container flex rounded-lg mb-2 px-4 py-2">
+                        <div className="w-40 aspect-square mr-4">
+                            <img src="/images/activity-icon.png" alt="Activity Icon" className="w-full h-full object-cover rounded-full" />
+                        </div>
+                        <div className="flex-grow p-2">
+                            <h2 className="font-semibold text-2xl mb-1">{activity.title}</h2>
+                            <p className="mb-2">{activity.description}</p>
+                            <p><span className="text-yellow-700">Location: </span>{activity.location}</p>
+                            <p><span className="text-yellow-700">Participants: </span><span className="font-semibold">{activity.participants_count}/{activity.max_participants}</span></p>
+                            <p><span className="text-yellow-700">Age Range: </span>{activity.minimum_age} - {activity.maximum_age}</p>
+                            <p><span className="text-yellow-700">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
+                        </div>
                     </Link> 
                 ))}
             </div>
