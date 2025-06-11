@@ -44,10 +44,10 @@ const ActivityFeed: React.FC = () => {
             <h1 className="text-5xl font-bold">Activity Feed</h1>
             <p className="text-xl mt-6">This is the activity page. You can find activities here that you can choose to participate in.</p>
 
-            <div className="mt-6">
+            <div className="mt-6 grid grid-cols-2 gap-4">
                 {activities.map((activity) => (
                    <Link to={`/activities/${activity.id}`} key={activity.id} className="activity-container flex rounded-lg mb-2 px-4 py-2">
-                        <div className="w-40 aspect-square mr-4">
+                        <div className="w-32 aspect-square mr-4">
                             <img src="/images/activity-icon.png" alt="Activity Icon" className="w-full h-full object-cover rounded-full" />
                         </div>
                         <div className="flex-grow p-2">
