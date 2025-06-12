@@ -41,7 +41,9 @@ const Activity = () => {
         <div>
             <small className="text-yellow-700">Activity</small>
 
-            <h1 className="text-xl font-bold mb-1">{activity.title}</h1>
+            <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-64 h-64 object-cover rounded-lg mt-1 mb-4" />
+
+            <h1 className="text-2xl font-bold mb-1">{activity.title}</h1>
             <p className="mb-2">{activity.description}</p>
             <p><span className="text-yellow-700">Location: </span>{activity.location}</p>
             <p><span className="text-yellow-700">Max Participants: </span><span className="font-semibold">{activity.max_participants}</span></p>
