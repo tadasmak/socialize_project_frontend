@@ -46,7 +46,7 @@ const ActivityFeed: React.FC = () => {
 
             <div className="mt-6 grid justify-center grid-cols-1 lg:grid-cols-2 gap-4">
                 {activities.map((activity) => (
-                   <Link to={`/activities/${activity.id}`} key={activity.id} className="activity-container flex max-w-180 rounded-lg mb-2 px-4 py-2">
+                   <Link to={`/activities/${activity.id}`} key={activity.id} className="activity-container flex max-w-180 rounded-lg px-4 py-2">
                         <div className="flex items-center w-1/3 min-w-48 aspect-square mr-4">
                             <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-full object-cover" />
                         </div>

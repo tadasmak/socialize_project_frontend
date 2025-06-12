@@ -15,7 +15,7 @@ const App = () => {
     <Router>
       <Navigation />
 
-      <main className="mx-auto mt-12 max-w-7xl px-2 sm:px-6 lg:px-8">
+      <main className="mx-auto mt-12 max-w-7xl px-2 sm:px-6 lg:px-8 pb-12">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/activities" element={<ActivityFeed />} />
