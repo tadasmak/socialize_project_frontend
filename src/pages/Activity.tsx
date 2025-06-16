@@ -39,7 +39,7 @@ const Activity = () => {
     return (
         <div className="max-w-4xl mx-auto p-6 text-white">
             <div className="flex justify-between mb-4">
-                <button className="text-sm text-coral-light hover:underline cursor-pointer">← Back to Activities</button>
+                <Link to="/activities" className="text-sm text-coral-light hover:underline cursor-pointer">← Back to Activities</Link>
 
                 {/* if currentUser === activity.creator */}
                 <button className="text-sm text-gray-300 hover:text-white cursor-pointer mr-2">✏️ Edit</button>
