@@ -22,7 +22,7 @@ export default function Navigation() {
                     <Link to="/activity/new" className="bg-coral inline-flex items-center text-sm font-medium rounded-md px-4 py-2 mr-4"><img className="h-4 mr-2" src="../src/assets/icons/plus.svg" />New Activity</Link>
                     <div className="rounded-md px-2 py-1">
                         <Link to="/profile" className="relative rounded-full p-1 text-gray-400 hover:text-white">
-                            <img src="../src/assets/branding/profile-icon-placeholder.svg" className="size-8 rounded-full" />
+                            <img src="../src/assets/icons/profile-icon-placeholder.svg" className="size-8 rounded-full" />
                         </Link>
                     </div>
                 </div>
