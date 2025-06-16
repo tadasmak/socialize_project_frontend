@@ -53,10 +53,10 @@ const ActivityFeed: React.FC = () => {
                         <div className="px-2 flex-grow overflow-hidden">
                             <h2 className="font-semibold truncate text-2xl mb-1">{activity.title}</h2>
                             <p className="truncate mb-2">{activity.description}</p>
-                            <p className="truncate"><span className="text-coral">Location: </span>{activity.location}</p>
-                            <p><span className="text-coral">Participants: </span><span className="font-semibold">{activity.participants_count}/{activity.max_participants}</span></p>
-                            <p><span className="text-coral">Age Range: </span>{activity.minimum_age} - {activity.maximum_age}</p>
-                            <p className="truncate"><span className="text-coral">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
+                            <p className="truncate"><span className="text-coral-light">Location: </span>{activity.location}</p>
+                            <p><span className="text-coral-light">Participants: </span><span className="font-semibold">{activity.participants_count}/{activity.max_participants}</span></p>
+                            <p><span className="text-coral-light">Age Range: </span>{activity.minimum_age} - {activity.maximum_age}</p>
+                            <p className="truncate"><span className="text-coral-light">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
                         </div>
                     </Link> 
                 ))}
