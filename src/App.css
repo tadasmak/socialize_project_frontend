@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.activity-container {
+.card {
   background-color: #292929;
 }
 
@@ -15,7 +15,6 @@
 .text-coral {
   color: #b05c56;
 }
-
 .text-coral-light {
   color: #d6837f;
 }
