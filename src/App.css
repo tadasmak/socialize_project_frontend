@@ -5,3 +5,13 @@
 .activity-container {
   background-color: #292929;
 }
+
+.bg-coral {
+  background-color: #b05c56;
+}
+.border-coral {
+  border-color: #b05c56;
+}
+.text-coral {
+  color: #b05c56;
+}

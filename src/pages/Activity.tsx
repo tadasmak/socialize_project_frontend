@@ -39,25 +39,25 @@ const Activity = () => {
 
     return (
         <div>
-            <small className="text-yellow-700">Activity</small>
+            <small className="text-coral">Activity</small>
 
             <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-64 h-64 object-cover rounded-lg mt-1 mb-4" />
 
             <h1 className="text-2xl font-bold mb-1">{activity.title}</h1>
             <p className="mb-2">{activity.description}</p>
-            <p><span className="text-yellow-700">Location: </span>{activity.location}</p>
-            <p><span className="text-yellow-700">Max Participants: </span><span className="font-semibold">{activity.max_participants}</span></p>
-            <p><span className="text-yellow-700">Age Range: </span>{activity.minimum_age} - {activity.maximum_age}</p>
-            <p><span className="text-yellow-700">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
+            <p><span className="text-coral">Location: </span>{activity.location}</p>
+            <p><span className="text-coral">Max Participants: </span><span className="font-semibold">{activity.max_participants}</span></p>
+            <p><span className="text-coral">Age Range: </span>{activity.minimum_age} - {activity.maximum_age}</p>
+            <p><span className="text-coral">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
 
             <div className="mt-4">
-                <h2 className="text-lg font-semibold">Creator: <Link to={`/users/${activity.creator.username}`} className="text-yellow-700">{activity.creator.username}</Link></h2>
+                <h2 className="text-lg font-semibold">Creator: <Link to={`/users/${activity.creator.username}`} className="text-coral">{activity.creator.username}</Link></h2>
             </div>
 
             <div className="mt-4">
                 <h2 className="text-lg font-semibold">Participants:</h2>
                 {activity.participants.map((participant) => (
-                    <Link to={`/users/${participant.username}`} key={participant.id} className="block"><span className="text-yellow-700">{participant.username}</span>{participant.username === activity.creator.username && ' (creator)'}</Link>
+                    <Link to={`/users/${participant.username}`} key={participant.id} className="block"><span className="text-coral">{participant.username}</span>{participant.username === activity.creator.username && ' (creator)'}</Link>
                 ))}
             </div>
         </div>
