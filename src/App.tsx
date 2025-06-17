@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import User from './pages/User';
 
 import Register from './pages/Register';
+import Login from './pages/Login';
 
 import Navigation from './components/Navigation';
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/users/:username" element={<User />} />
 
           <Route path="/users/register" element={<Register />} />
+          <Route path="/users/login" element={<Login />} />
         </Routes>
       </main>
     </Router>
