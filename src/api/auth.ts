@@ -22,3 +22,5 @@ export const login = async (email: string, password: string) => {
     if (!response.ok) throw new Error(data.errors || data.error);
     localStorage.setItem('authToken', data.token);
 }
+
+export const getToken = () => localStorage.getItem('authToken');
