@@ -24,3 +24,5 @@ export const login = async (email: string, password: string) => {
 }
 
 export const getToken = () => localStorage.getItem('authToken');
+
+export const logout = () => localStorage.removeItem('authToken');
