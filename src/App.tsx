@@ -24,11 +24,11 @@ const App = () => {
           <Route path="/activities" element={<ActivityFeed />} />
           <Route path="/activities/:id" element={<Activity />} />
           <Route path="/activities/new" element={<ActivityCreation />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/users/:username" element={<User />} />
 
           <Route path="/users/register" element={<Register />} />
           <Route path="/users/login" element={<Login />} />
+          <Route path="/users/me" element={<Profile />} />
         </Routes>
       </main>
     </Router>
