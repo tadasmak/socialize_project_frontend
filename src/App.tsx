@@ -8,6 +8,8 @@ import ActivityCreation from './pages/ActivityCreation';
 import Profile from './pages/Profile';
 import User from './pages/User';
 
+import Register from './pages/Register';
+
 import Navigation from './components/Navigation';
 
 const App = () => {
@@ -23,6 +25,8 @@ const App = () => {
           <Route path="/activities/new" element={<ActivityCreation />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/users/:username" element={<User />} />
+
+          <Route path="/users/register" element={<Register />} />
         </Routes>
       </main>
     </Router>
