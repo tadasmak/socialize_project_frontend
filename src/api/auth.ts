@@ -20,7 +20,9 @@ export const login = async (email: string, password: string) => {
 
     const data = await response.json();
     if (!response.ok) throw new Error(data.errors || data.error);
-    localStorage.setItem('authToken', data.token);
+
+    const token = response.headers.get('Authorization');
+    if (token) localStorage.setItem('authToken', token);
 }
 
 export const getToken = () => localStorage.getItem('authToken');
