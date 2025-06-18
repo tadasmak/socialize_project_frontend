@@ -20,7 +20,7 @@ export const Register = () => {
                 autoClose: 3000,
                 pauseOnHover: true,
                 theme: 'dark',
-                className: 'text-white',
+                className: 'bg-gradient text-white',
             });
 
             setTimeout(() => navigate('/users/login'), 3000);

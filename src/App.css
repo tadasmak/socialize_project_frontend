@@ -6,6 +6,9 @@
   background-color: #292929;
 }
 
+.bg-gradient {
+  background-image: linear-gradient(to right, #5f403e, #574537, #35353d) !important;
+}
 .bg-coral {
   background-color: #b05c56;
 }

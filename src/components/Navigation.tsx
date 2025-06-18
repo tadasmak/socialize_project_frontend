@@ -6,7 +6,7 @@ const navigationItems = [
 
 export default function Navigation() {
   return (
-    <nav className="bg-gradient-to-r from-[#5f403e] via-[#574537] to-[#35353d]">
+    <nav className="bg-gradient">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="flex justify-between relative items-center h-16">
                 <Link to="/activities" className="flex items-center h-full inset-y-0 left-0">
