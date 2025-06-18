@@ -12,7 +12,7 @@ export const register = async (email: string, password: string) => {
 }
 
 export const login = async (email: string, password: string) => {
-    const response = await fetch(`${API_URL}/sign_in`, {
+    const response = await fetch(`${API_URL}/users/sign_in`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
