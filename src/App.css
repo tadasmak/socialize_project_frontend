@@ -22,5 +22,8 @@
   color: #d6837f;
 }
 .hover\:bg-coral-darker:hover {
-  background-color: #8a453f;
+  background-color: #a44f4a;
+}
+.focus\:ring-bg-coral:focus {
+  --tw-ring-color: #b05c56;
 }
