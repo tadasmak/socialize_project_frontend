@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { login } from '../api/auth';
+import { useAuth } from '../context/AuthContext';
 
 export const Login = () => {
     const [email, setEmail] = useState('');
@@ -10,10 +11,13 @@ export const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    const { login: contextLogin } = useAuth();
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await login(email, password);
+            const token = await login(email, password);
+            await contextLogin(token);
 
             toast.success('Logged in', {
                 position: 'bottom-center',
