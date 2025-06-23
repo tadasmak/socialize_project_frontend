@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 
+import { useAuth } from '../context/AuthContext';
+
 const navigationItems = [
   { name: 'Activities', href: '/', current: true },
 ]
 
 export default function Navigation() {
+    const { user, logout } = useAuth();
+
   return (
     <nav className="bg-gradient">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
