@@ -32,7 +32,7 @@ export const getCurrentUser = async () => {
 
     if (!token) throw new Error('Not authenticated');
 
-    const response = await fetch(`${API_URL}/users/me`, {
+    const response = await fetch(`${API_URL}/current_user`, {
         headers: { 
             'Content-Type': 'application/json',
             'Authorization': token
@@ -42,7 +42,7 @@ export const getCurrentUser = async () => {
     if (!response.ok) return null;
 
     const data = await response.json();
-    return data.user;
+    return data;
 }
 
 export const logout = () => localStorage.removeItem('authToken');
