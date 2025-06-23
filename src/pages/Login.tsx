@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { login } from '../api/auth';
+import { apiLogin } from '../api/auth';
 import { useAuth } from '../context/AuthContext';
 
 export const Login = () => {
@@ -16,7 +16,7 @@ export const Login = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const token = await login(email, password);
+            const token = await apiLogin(email, password);
             await contextLogin(token);
 
             toast.success('Logged in', {

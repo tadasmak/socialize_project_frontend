@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { getCurrentUser, logout as apiLogout } from '../api/auth';
+import { getCurrentUser, apiLogout } from '../api/auth';
 
 type User = {
     id: number;

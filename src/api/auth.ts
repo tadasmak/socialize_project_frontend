@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:3000/api/v1';
 
-export const register = async (email: string, password: string) => {
+export const apiRegister = async (email: string, password: string) => {
     const response = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -11,7 +11,7 @@ export const register = async (email: string, password: string) => {
     if (!response.ok) throw new Error(data.errors || data.error);
 }
 
-export const login = async (email: string, password: string) => {
+export const apiLogin = async (email: string, password: string) => {
     const response = await fetch(`${API_URL}/users/sign_in`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -49,4 +49,4 @@ export const getCurrentUser = async () => {
     return data;
 }
 
-export const logout = () => localStorage.removeItem('authToken');
+export const apiLogout = () => localStorage.removeItem('authToken');
