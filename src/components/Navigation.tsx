@@ -23,14 +23,26 @@ export default function Navigation() {
                     ))}
                 </Link>
                 <div className="flex items-center">
-                    <Link to="/activity/new" className="bg-coral hover:bg-coral-darker duration-100 inline-flex items-center text-sm font-medium rounded-md px-4 py-2 mr-4"><img className="h-4 mr-2" src="../src/assets/icons/plus.svg" />New Activity</Link>
-                    <div className="rounded-md px-2 py-1">
-                        <Link to="/users/me" className="relative rounded-full p-1 text-gray-400 hover:text-white">
-                            <img src="../src/assets/icons/profile-icon-placeholder.svg" className="size-8 rounded-full" />
-                        </Link>
+                    <div className="flex items-center space-x-4">
+                        {user ? (
+                            <>
+                            <Link to="/activity/new" className="bg-coral hover:bg-coral-darker duration-100 inline-flex items-center text-sm font-medium rounded-md px-4 py-2">
+                                <img className="h-4 mr-2" src="../src/assets/icons/plus.svg" />
+                                New Activity
+                            </Link>
+                            <Link to="/users/me" className="relative rounded-full p-1 text-gray-400 hover:text-white">
+                                <img src="../src/assets/icons/profile-icon-placeholder.svg" className="size-8 rounded-full" />
+                            </Link>
+                            <button onClick={logout} className="text-sm font-small text-red-500 hover:underline">Logout</button>
+                            </>
+                        ) : (
+                            <>
+                            <Link to="/users/login" className="text-sm font-medium text-white hover:underline">Login</Link>
+                            <Link to="/users/register" className="bg-coral hover:bg-coral-darker duration-100 text-sm font-medium rounded-md px-4 py-2 text-white">Register</Link>
+                            </>
+                        )}
                     </div>
                 </div>
-                
             </div>
         </div>
     </nav>
