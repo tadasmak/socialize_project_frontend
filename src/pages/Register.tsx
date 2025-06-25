@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { register } from '../api/auth';
+import { apiRegister } from '../api/auth';
 
 export const Register = () => {
     const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ export const Register = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await register(email, password);
+            await apiRegister(email, password);
 
             toast.success('Registered successfully!', {
                 position: 'bottom-center',
