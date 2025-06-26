@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import User from './User';
 
 interface ActivityType {
     title: string;
@@ -20,6 +19,8 @@ interface ActivityType {
     }>
 }
 
+const activityCache = new Map<string, ActivityType>();
+
 const Activity = () => {
     const params = useParams();
     const id = params.id;
@@ -27,11 +28,20 @@ const Activity = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (activityCache.has(id!)) {
+            setActivity(activityCache.get(id!)!);
+            setLoading(false);
+            return;
+        }
+
         fetch(`/api/v1/activities/${id}`)
-        .then(response => response.json())
-        .then(data => setActivity(data))
-        .catch(error => console.error('Error fetching activity:', error))
-        .finally(() => setLoading(false));
+            .then(response => response.json())
+            .then(data => {
+                setActivity(data);
+                activityCache.set(id!, data);
+            })
+            .catch(error => console.error('Error fetching activity:', error))
+            .finally(() => setLoading(false));
     }, [id])
 
     if (loading) return <p>Loading...</p>;
@@ -39,6 +49,7 @@ const Activity = () => {
 
     return (
         <div className="max-w-4xl mx-auto p-6 text-white">
+            
             <div className="flex justify-between mb-4">
                 <Link to="/activities" className="text-sm text-coral-light hover:underline cursor-pointer">← Back to Activities</Link>
 
