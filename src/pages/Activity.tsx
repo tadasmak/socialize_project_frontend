@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import { useAuth } from '../context/AuthContext';
+
 interface ActivityType {
     title: string;
     description: string;
@@ -9,7 +11,7 @@ interface ActivityType {
     max_participants: number;
     age_range: string;
     creator: {
-        id: string;
+        id: number;
         username: string;
     }
     participants: Array<{
@@ -26,6 +28,8 @@ const Activity = () => {
     const id = params.id;
     const [activity, setActivity] = useState<ActivityType | null>(null);
     const [loading, setLoading] = useState(true);
+
+    const { user } = useAuth();
 
     useEffect(() => {
         if (activityCache.has(id!)) {
@@ -52,9 +56,7 @@ const Activity = () => {
             
             <div className="flex justify-between mb-4">
                 <Link to="/activities" className="text-sm text-coral-light hover:underline cursor-pointer">← Back to Activities</Link>
-
-                {/* if currentUser === activity.creator */}
-                <button className="text-sm text-gray-300 hover:text-white cursor-pointer mr-2">✏️ Edit</button>
+                { user && user.id === activity.creator.id && (<button className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</button>) }
             </div>
 
             <div className="card rounded-xl p-6 shadow-lg">
