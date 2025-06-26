@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 interface UserProfileType {
@@ -23,6 +23,8 @@ const UserProfile = ()  => {
     const [user, setUser] = useState<UserProfileType | null>(null);
     const [loading, setLoading] = useState(true);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         fetch(`/api/v1/users/${username}`)
         .then(response => response.json())
@@ -37,7 +39,7 @@ const UserProfile = ()  => {
     return (
         <div className="max-w-2xl mx-auto p-6 text-white">
             <div className="flex justify-between mb-4">
-                <Link to="/activities" className="text-sm text-coral-light hover:underline">← Back to Activities</Link>
+                <a className="text-sm text-coral-light hover:underline" onClick={() => navigate(-1)}>← Back to Activity</a>
             </div>
 
             <div className="card rounded-xl p-6 shadow-lg">
