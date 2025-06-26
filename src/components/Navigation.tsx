@@ -26,14 +26,14 @@ export default function Navigation() {
                     <div className="flex items-center space-x-4">
                         {user ? (
                             <>
-                            <Link to="/activity/new" className="bg-coral hover:bg-coral-darker duration-100 inline-flex items-center text-sm font-medium rounded-md px-4 py-2">
+                            <Link to="/activities/new" className="bg-coral hover:bg-coral-darker duration-100 inline-flex items-center text-sm font-medium rounded-md px-4 py-2">
                                 <img className="h-4 mr-2" src="../src/assets/icons/plus.svg" />
                                 New Activity
                             </Link>
                             <Link to="/users/me" className="relative rounded-full p-1 text-gray-400 hover:text-white">
                                 <img src="../src/assets/icons/profile-icon-placeholder.svg" className="size-8 rounded-full" />
                             </Link>
-                            <button onClick={logout} className="text-sm font-small text-red-500 hover:underline">Logout</button>
+                            <button onClick={logout} className="text-sm font-small text-rose-500 hover:underline cursor-pointer">Logout</button>
                             </>
                         ) : (
                             <>
