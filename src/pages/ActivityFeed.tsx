@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 type Activity = {
     id: number;
@@ -13,17 +13,31 @@ type Activity = {
     maximum_age: number;
 }
 
+const PAGE_SIZE = 10;
+
 const ActivityFeed: React.FC = () => {
     const [activities, setActivities] = useState<Activity[]>([]);
     const [loading, setLoading] = useState(true);
+    
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const page = parseInt(searchParams.get('page') || '1', 10);
 
     useEffect(() => {
+        const params = {
+            page: searchParams.get('page') || '1',
+            limit: PAGE_SIZE.toString()
+        }
+
         const fetchActivities = async () => {
+            setLoading(true);
+
             try {
-                const response = await fetch('/api/v1/activities');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch activities');
-                }
+                const query = new URLSearchParams(params).toString();
+                const response = await fetch(`/api/v1/activities?${query}`);
+
+                if (!response.ok) throw new Error('Failed to fetch activities');
+
                 const data = await response.json();
                 setActivities(data);
             } catch (error) {
@@ -34,7 +48,13 @@ const ActivityFeed: React.FC = () => {
         };
         
         fetchActivities();
-    }, []);
+    }, [searchParams]);
+
+    const goToPage = (newPage: number) => {
+        const params = Object.fromEntries(searchParams.entries());
+        params.page = newPage.toString();
+        setSearchParams(params);
+    }
 
     if (loading) return <div>Loading activities...</div>;
     if (!activities.length) return <div>No activities found.</div>;
@@ -60,6 +80,12 @@ const ActivityFeed: React.FC = () => {
                         </div>
                     </Link> 
                 ))}
+            </div>
+
+            <div className="flex justify-center mt-8 gap-2">
+                <button onClick={() => goToPage(page - 1)} disabled={page <= 1} className="px-4 py-2 w-24 rounded bg-coral text-white disabled:opacity-50">Previous</button>
+                <span className="px-4 py-2">{page}</span>
+                <button onClick={() => goToPage(page + 1)} className="px-4 py-2 w-24 rounded bg-coral text-white disabled:opacity-50">Next</button>
             </div>
         </div>
     );
