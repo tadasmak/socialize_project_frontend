@@ -1,4 +1,4 @@
-import { useParams, useNavigate, Link, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 interface UserProfileType {
@@ -17,6 +17,8 @@ const personalityDescriptions = [
     "Very Introverted"
 ]
 
+const userCache = new Map<string, UserProfileType>();
+
 const UserProfile = ()  => {
     const params = useParams();
     const username = params.username;
@@ -26,9 +28,18 @@ const UserProfile = ()  => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (userCache.has(username!)) {
+            setUser(userCache.get(username!)!);
+            setLoading(false);
+            return;
+        }
+
         fetch(`/api/v1/users/${username}`)
         .then(response => response.json())
-        .then(data => setUser(data))
+        .then(data => {
+            setUser(data);
+            userCache.set(username!, data);
+        })
         .catch(error => console.error('Error fetching user:', error))
         .finally(() => setLoading(false));
     }, [username])
@@ -38,6 +49,8 @@ const UserProfile = ()  => {
 
     return (
         <div className="max-w-2xl mx-auto p-6 text-white">
+            
+
             <div className="flex justify-between mb-4">
                 <a className="text-sm text-coral-light hover:underline" onClick={() => navigate(-1)}>← Back to Activity</a>
             </div>
