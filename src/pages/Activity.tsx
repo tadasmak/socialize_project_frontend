@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import { apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
-import ActivityCreation from './ActivityCreation';
 
 interface ActivityType {
     title: string;
@@ -39,7 +39,7 @@ const Activity = () => {
             return;
         }
 
-        fetch(`/api/v1/activities/${id}`)
+        apiFetch(`/api/v1/activities/${id}`)
             .then(response => response.json())
             .then(data => {
                 setActivity(data);
@@ -53,7 +53,7 @@ const Activity = () => {
         if (!user) return alert('You must be logged in to join an activity');
 
         try {
-            const response = await fetch(`http://localhost:3000/api/v1/activities/${id}/join`, {
+            const response = await apiFetch(`/api/v1/activities/${id}/join`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

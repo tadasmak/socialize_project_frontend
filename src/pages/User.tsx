@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import { apiFetch } from '../utils/api';
+
 interface UserProfileType {
     username: string;
     personality: number;
@@ -34,7 +36,7 @@ const UserProfile = ()  => {
             return;
         }
 
-        fetch(`/api/v1/users/${username}`)
+        apiFetch(`/api/v1/users/${username}`)
         .then(response => response.json())
         .then(data => {
             setUser(data);

@@ -1,7 +1,9 @@
+import { apiFetch } from '../utils/api'
+
 const API_URL = 'http://localhost:3000/api/v1';
 
 export const apiRegister = async (email: string, password: string) => {
-    const response = await fetch(`${API_URL}/users`, {
+    const response = await apiFetch(`${API_URL}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user: { email, password } })
@@ -12,7 +14,7 @@ export const apiRegister = async (email: string, password: string) => {
 }
 
 export const apiLogin = async (email: string, password: string) => {
-    const response = await fetch(`${API_URL}/users/sign_in`, {
+    const response = await apiFetch(`${API_URL}/users/sign_in`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user: { email, password } })
@@ -36,7 +38,7 @@ export const getCurrentUser = async () => {
 
     if (!token) throw new Error('Not authenticated');
 
-    const response = await fetch(`${API_URL}/current_user`, {
+    const response = await apiFetch(`${API_URL}/current_user`, {
         headers: { 
             'Content-Type': 'application/json',
             'Authorization': token

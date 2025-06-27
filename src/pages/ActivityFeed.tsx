@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from 'react-router-dom';
 
+import { apiFetch } from '../utils/api';
+
 type Activity = {
     id: number;
     title: string;
@@ -34,7 +36,7 @@ const ActivityFeed: React.FC = () => {
 
             try {
                 const query = new URLSearchParams(params).toString();
-                const response = await fetch(`/api/v1/activities?${query}`);
+                const response = await apiFetch(`/api/v1/activities?${query}`);
 
                 if (!response.ok) throw new Error('Failed to fetch activities');
 
