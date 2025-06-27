@@ -24,10 +24,8 @@ export const apiLogin = async (email: string, password: string) => {
     if (!response.ok) throw new Error(data.errors || data.error);
 
     const token = response.headers.get('Authorization');
-    if (token) {
-        localStorage.setItem('authToken', token);
-        return token;
-    }
+    if (token) return token;
+
     throw new Error('No token received');
 }
 
@@ -41,7 +39,7 @@ export const getCurrentUser = async () => {
     const response = await apiFetch(`${API_URL}/current_user`, {
         headers: { 
             'Content-Type': 'application/json',
-            'Authorization': token
+            'Authorization': `Bearer ${token}`
         }
     });
 

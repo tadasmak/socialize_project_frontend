@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const login = async (token: string) => {
-        localStorage.setItem('authToken', token);
+        localStorage.setItem('authToken', token.split(' ')[1]);
 
         const user = await getCurrentUser();
         if (user) {
