@@ -49,6 +49,29 @@ const Activity = () => {
             .finally(() => setLoading(false));
     }, [id])
 
+    const joinActivity = async () => {
+        if (!user) return alert('You must be logged in to join an activity');
+
+        try {
+            const response = await fetch(`http://localhost:3000/api/v1/activities/${id}/join`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                const errorMessage = errorData?.error || response.statusText || 'Failed to join the activity';
+                alert(errorMessage);
+                return;
+            }
+        } catch (error) {
+            alert('An error occurred while trying to join the activity. Please try again');
+            console.error(error);
+        }
+    }
+
     if (loading) return <p>Loading...</p>;
     if (!activity) return <p>Activity not found</p>;
 
@@ -102,7 +125,7 @@ const Activity = () => {
                         if (activity.participants.some(participant => participant.id === user.id)) {
                             return <div className="text-green-500 font-semibold px-4 py-2 rounded cursor-default">✅ You already participate in this activity</div>;
                         }
-                        return <button className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer">Join Activity</button>;
+                        return <button onClick={() => joinActivity()} className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer">Join Activity</button>;
                     })()}
                 </div>
             </div>
