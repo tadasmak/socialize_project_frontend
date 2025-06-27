@@ -50,9 +50,8 @@ const UserProfile = ()  => {
     return (
         <div className="max-w-2xl mx-auto p-6 text-white">
             
-
             <div className="flex justify-between mb-4">
-                <a className="text-sm text-coral-light hover:underline" onClick={() => navigate(-1)}>← Back to Activity</a>
+                <a className="text-sm text-coral-light cursor-pointer hover:underline" onClick={() => navigate(-1)}>← Back to Activity</a>
             </div>
 
             <div className="card rounded-xl p-6 shadow-lg">
