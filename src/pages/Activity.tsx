@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import { useAuth } from '../context/AuthContext';
+import ActivityCreation from './ActivityCreation';
 
 interface ActivityType {
     title: string;
@@ -90,11 +91,20 @@ const Activity = () => {
                     </div>
                 </div>
 
-                { user && user.id !== activity.creator.id && !activity.participants.some(p => p.id === user.id) && (
-                    <div className="mt-8 flex justify-end">
-                        <button className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer">Join Activity</button>
-                    </div>
-                )}
+                <div className="mt-8 flex justify-end">
+                    {(() => {
+                        if (!user) {
+                            return <Link to="/users/login" className="text-coral font-semibold px-4 py-2 rounded hover:underline">Login to join this activity</Link>;
+                        }
+                        if (user.id === activity.creator.id) {
+                            return <div className="text-yellow-500 font-semibold px-4 py-2 rounded cursor-default">👑 You are the creator of this activity</div>;
+                        }
+                        if (activity.participants.some(participant => participant.id === user.id)) {
+                            return <div className="text-green-500 font-semibold px-4 py-2 rounded cursor-default">✅ You already participate in this activity</div>;
+                        }
+                        return <button className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer">Join Activity</button>;
+                    })()}
+                </div>
             </div>
         </div>
     );
