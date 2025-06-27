@@ -67,10 +67,10 @@ const Activity = () => {
                 <p className="mt-2 text-gray-400">Created by <Link to={`/users/${activity.creator.username}`} className="text-white hover:underline">@{activity.creator.username}</Link></p>
 
                 <div className="mt-4 grid gap-1 text-md">
-                    <p>📍 <span className='text-coral-light'>Location: </span><span className="text-gray-300 font-semibold">{activity.location}</span></p>
-                    <p>👥 <span className='text-coral-light'>Participants: </span><span className="text-gray-300 font-semibold">{activity.participants.length} / {activity.max_participants}</span></p>
-                    <p>🎂 <span className='text-coral-light'>Age range: </span><span className="text-gray-300 font-semibold">{activity.age_range}</span></p>
-                    <p>📅 <span className='text-coral-light'>Start time: </span><span className="text-gray-300 font-semibold">{new Date(activity.start_time).toLocaleString()}</span></p>
+                    <p>📍 <span className="text-coral-light">Location: </span><span className="text-gray-300 font-semibold">{activity.location}</span></p>
+                    <p>👥 <span className="text-coral-light">Participants: </span><span className="text-gray-300 font-semibold">{activity.participants.length} / {activity.max_participants}</span></p>
+                    <p>🎂 <span className="text-coral-light">Age range: </span><span className="text-gray-300 font-semibold">{activity.age_range}</span></p>
+                    <p>📅 <span className="text-coral-light">Start time: </span><span className="text-gray-300 font-semibold">{new Date(activity.start_time).toLocaleString()}</span></p>
                 </div>
 
                 <div className="mt-6">
@@ -90,9 +90,11 @@ const Activity = () => {
                     </div>
                 </div>
 
-                <div className="mt-8">
-                    <button className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer">Join Activity</button>
-                </div>
+                { user && user.id !== activity.creator.id && !activity.participants.some(p => p.id === user.id) && (
+                    <div className="mt-8 flex justify-end">
+                        <button className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer">Join Activity</button>
+                    </div>
+                )}
             </div>
         </div>
     );
