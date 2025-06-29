@@ -23,7 +23,7 @@ export const Register = () => {
                 className: 'bg-gradient text-white',
             });
 
-            setTimeout(() => navigate('/users/login'), 3000);
+            navigate('/users/login');
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setError(err.message)

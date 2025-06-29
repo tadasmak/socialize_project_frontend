@@ -27,7 +27,7 @@ export const Login = () => {
                 className: 'bg-gradient text-white',
             });
 
-            setTimeout(() => navigate('/activities'), 3000);
+            navigate('/activities');
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setError(err.message)
