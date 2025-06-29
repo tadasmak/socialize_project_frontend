@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
 
 import { apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
@@ -32,6 +34,22 @@ const Activity = () => {
 
     const { user } = useAuth();
 
+    const fetchActivity = useCallback(async () => {
+        setLoading(true);
+        try {
+            const response = await apiFetch(`/api/v1/activities/${id}`);
+            if (!response.ok) throw new Error('Failed to fetch activity');
+
+            const data = await response.json();
+            setActivity(data);
+            activityCache.set(id!, data);
+        } catch (error) {
+            console.error('Error fetching activity:', error);
+        } finally {
+            setLoading(false);
+        }
+    }, [id]);
+
     useEffect(() => {
         if (activityCache.has(id!)) {
             setActivity(activityCache.get(id!)!);
@@ -39,16 +57,9 @@ const Activity = () => {
             return;
         }
 
-        apiFetch(`/api/v1/activities/${id}`)
-            .then(response => response.json())
-            .then(data => {
-                setActivity(data);
-                activityCache.set(id!, data);
-            })
-            .catch(error => console.error('Error fetching activity:', error))
-            .finally(() => setLoading(false));
-    }, [id])
-
+        fetchActivity();
+    }, [id, fetchActivity])
+    
     const joinActivity = async () => {
         if (!user) return alert('You must be logged in to join an activity');
 
@@ -61,10 +72,21 @@ const Activity = () => {
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                const errorMessage = errorData?.error || response.statusText || 'Failed to join the activity';
+                const data = await response.json();
+
+                const errorMessage = data?.errors || 'Failed to join activity';
                 alert(errorMessage);
                 return;
+            } else {
+                toast.success('You have joined the activity!', {
+                    position: 'bottom-center',
+                    autoClose: 2000,
+                    pauseOnHover: true,
+                    theme: 'dark',
+                    className: 'bg-gradient text-white',
+                });
+
+                fetchActivity();
             }
         } catch (error) {
             alert('An error occurred while trying to join the activity. Please try again');
