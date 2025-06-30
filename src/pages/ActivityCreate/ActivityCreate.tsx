@@ -151,17 +151,16 @@ const ActivityCreate = () => {
           />
         </div>
 
-        <div>
-          <MaxParticipantsSlider value={form.max_participants} onChange={handleMaxParticipantsChange} />
-        </div>
+        <MaxParticipantsSlider value={form.max_participants} onChange={handleMaxParticipantsChange} />
+        <AgeRangeSlider value={ageRange} onChange={handleAgeRangeChange} />
 
-        <div>
-          <AgeRangeSlider value={ageRange} onChange={handleAgeRangeChange} />
-        </div>
-
-        <div>
-
-        </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className={`w-full mt-6 py-3 bg-coral hover:bg-coral-darker text-white rounded font-semibold cursor-pointer transition-colors duration-100 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+        >
+          {loading ? 'Creating...' : 'Create Activity'}
+        </button>
       </form>
     </div>
   );
