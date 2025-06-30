@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
+
 import { apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 
@@ -13,7 +17,7 @@ const ActivityCreate = () => {
     title: '',
     description: '',
     location: '',
-    start_time: '',
+    start_time: null as Date | null,
     max_participants: 5,
     age_range: '',
   });
@@ -24,6 +28,10 @@ const ActivityCreate = () => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
+
+  const handleDateChange = (date: Date | null) => {
+    setForm(prev => ({ ...prev, start_time: date }));
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,17 +117,19 @@ const ActivityCreate = () => {
         </div>
 
         <div>
-          <label htmlFor="start_time" className="block mb-1 font-medium text-gray-300">Start Time</label>
-          <input
-            id="start_time"
-            type="datetime-local"
-            name="start_time"
-            value={form.start_time}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
-            required
-            step="600"
-          />
+            <label htmlFor="start_time" className="block mb-1 font-medium text-gray-300">Start Time</label>
+            <DatePicker
+                id="start_time"
+                selected={form.start_time}
+                onChange={handleDateChange}
+                showTimeSelect
+                timeIntervals={10}
+                dateFormat="Pp"
+                autoComplete="off"
+                className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] cursor-pointer focus:outline-none focus:ring-2 focus:ring-bg-coral"
+                placeholderText="Select date and time"
+                required
+            />
         </div>
 
         <div>
