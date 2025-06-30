@@ -8,7 +8,7 @@ import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home';
 import ActivityFeed from './pages/ActivityFeed';
 import Activity from './pages/Activity';
-import ActivityCreation from './pages/ActivityCreate';
+import ActivityCreation from './pages/ActivityCreate/ActivityCreate';
 import Profile from './pages/Profile';
 import User from './pages/User';
 

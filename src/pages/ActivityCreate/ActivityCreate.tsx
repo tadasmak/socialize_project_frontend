@@ -8,8 +8,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-import { apiFetch } from '../utils/api';
-import { useAuth } from '../context/AuthContext';
+import AgeRangeSlider from './AgeRangeSlider';
+
+import { apiFetch } from '../../utils/api';
+import { useAuth } from '../../context/AuthContext';
 
 const ActivityCreate = () => {
   const { user } = useAuth();
@@ -23,6 +25,8 @@ const ActivityCreate = () => {
     max_participants: 5,
     age_range: '',
   });
+
+  const [ageRange, setAgeRange] = useState<[number, number]>([18, 26]);
 
   const [loading, setLoading] = useState(false);
 
@@ -38,6 +42,11 @@ const ActivityCreate = () => {
   const handleMaxParticipantsChange = (value: number) => {
     setForm(prev => ({ ...prev, max_participants: value }));
   }
+
+  const handleAgeRangeChange = (values: [number, number]) => {
+    setAgeRange(values);
+    setForm(prev => ({ ...prev, age_range: `${values[0]}-${values[1]}` }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -123,44 +132,39 @@ const ActivityCreate = () => {
         </div>
 
         <div>
-            <label htmlFor="start_time" className="block mb-1 font-medium text-gray-300">Start Time</label>
-            <DatePicker
-                id="start_time"
-                selected={form.start_time}
-                onChange={handleDateChange}
-                showTimeSelect
-                timeIntervals={10}
-                dateFormat="Pp"
-                autoComplete="off"
-                className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] cursor-pointer focus:outline-none focus:ring-2 focus:ring-bg-coral"
-                placeholderText="Select date and time"
-                required
-            />
-        </div>
-
-        <div>
-            <label htmlFor="max_participants" className="block mb-2 font-medium text-gray-300">Maximum Participants: <span className="text-coral font-bold">{form.max_participants}</span></label>
-            <Slider
-                min={2}
-                max={8}
-                value={form.max_participants}
-                onChange={(value) => handleMaxParticipantsChange(value as number)}
-                trackStyle={{ backgroundColor: '#f87171' }}
-                handleStyle={{ borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1 }}
-            />
-        </div>
-
-        <div>
-          <label htmlFor="age_range" className="block mb-1 font-medium text-gray-300">Age Range</label>
-          <input
-            id="age_range"
-            name="age_range"
-            placeholder="e.g. 18-30"
-            value={form.age_range}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
+          <label htmlFor="start_time" className="block mb-1 font-medium text-gray-300">Start Time</label>
+          <DatePicker
+            id="start_time"
+            selected={form.start_time}
+            onChange={handleDateChange}
+            showTimeSelect
+            timeIntervals={10}
+            dateFormat="Pp"
+            autoComplete="off"
+            className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] cursor-pointer focus:outline-none focus:ring-2 focus:ring-bg-coral"
+            placeholderText="Select date and time"
             required
           />
+        </div>
+
+        <div>
+          <label htmlFor="max_participants" className="block mb-2 font-medium text-gray-300">Maximum Participants: <span className="text-coral font-bold">{form.max_participants}</span></label>
+          <Slider
+            min={2}
+            max={8}
+            value={form.max_participants}
+            onChange={(value) => handleMaxParticipantsChange(value as number)}
+            trackStyle={{ backgroundColor: '#f87171' }}
+            handleStyle={{ borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1 }}
+          />
+        </div>
+
+        <div>
+          <AgeRangeSlider value={ageRange} onChange={handleAgeRangeChange} />
+        </div>
+
+        <div>
+
         </div>
       </form>
     </div>
