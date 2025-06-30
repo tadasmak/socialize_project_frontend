@@ -20,8 +20,7 @@ const ActivityCreate = () => {
     description: '',
     location: '',
     start_time: null as Date | null,
-    max_participants: 5,
-    age_range: '',
+    max_participants: 5
   });
 
   const [ageRange, setAgeRange] = useState<[number, number]>([18, 26]);
@@ -51,11 +50,18 @@ const ActivityCreate = () => {
     if (!user) return toast.error('You must be logged in');
 
     setLoading(true);
+
     try {
+      const payload = {
+        ...form,
+        minimum_age: ageRange[0],
+        maximum_age: ageRange[1]
+      }
+
       const response = await apiFetch('/api/v1/activities', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
