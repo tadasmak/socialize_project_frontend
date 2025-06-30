@@ -7,24 +7,27 @@ interface AgeRangeSliderProps {
 }
 
 const AgeRangeSlider: React.FC<AgeRangeSliderProps> = ({ value, onChange }) => {
+    const handleChange = (input: number | number[]) => {
+        if (Array.isArray(input) && input.length === 2) {
+            onChange([input[0], input[1]]);
+        }
+    }
+
     return (
         <div>
             <label className="block mb-2 font-medium text-gray-300">
                 Age Range of Participants: <span className="text-coral font-bold">{value[0]} - {value[1]}</span>
             </label>
-            <Slider range
+            <Slider
+                range
                 min={18}
                 max={100}
                 value={value}
-                onChange={(val) => {
-                    if (Array.isArray(val) && val.length === 2) {
-                        onChange([val[0], val[1]]);
-                    }
-                }}
+                onChange={handleChange}
                 trackStyle={[{ backgroundColor: '#f87171' }]}
                 handleStyle={[
-                { borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1 },
-                { borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1 }
+                { borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1, zIndex: 0 },
+                { borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1, zIndex: 0 }
                 ]}
             />
         </div>
