@@ -4,7 +4,9 @@ import { toast } from 'react-toastify';
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { format } from 'date-fns';
+
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 import { apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
@@ -31,6 +33,10 @@ const ActivityCreate = () => {
 
   const handleDateChange = (date: Date | null) => {
     setForm(prev => ({ ...prev, start_time: date }));
+  }
+
+  const handleMaxParticipantsChange = (value: number) => {
+    setForm(prev => ({ ...prev, max_participants: value }));
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -133,17 +139,15 @@ const ActivityCreate = () => {
         </div>
 
         <div>
-          <label htmlFor="max_participants" className="block mb-1 font-medium text-gray-300">Max Participants</label>
-          <input
-            id="max_participants"
-            type="number"
-            name="max_participants"
-            value={form.max_participants}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
-            required
-            min={1}
-          />
+            <label htmlFor="max_participants" className="block mb-2 font-medium text-gray-300">Maximum Participants: <span className="text-coral font-bold">{form.max_participants}</span></label>
+            <Slider
+                min={2}
+                max={8}
+                value={form.max_participants}
+                onChange={(value) => handleMaxParticipantsChange(value as number)}
+                trackStyle={{ backgroundColor: '#f87171' }}
+                handleStyle={{ borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1 }}
+            />
         </div>
 
         <div>
