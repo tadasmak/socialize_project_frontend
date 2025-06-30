@@ -5,9 +5,7 @@ import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
-
+import MaxParticipantsSlider from './MaxParticipantsSlider';
 import AgeRangeSlider from './AgeRangeSlider';
 
 import { apiFetch } from '../../utils/api';
@@ -148,15 +146,7 @@ const ActivityCreate = () => {
         </div>
 
         <div>
-          <label htmlFor="max_participants" className="block mb-2 font-medium text-gray-300">Maximum Participants: <span className="text-coral font-bold">{form.max_participants}</span></label>
-          <Slider
-            min={2}
-            max={8}
-            value={form.max_participants}
-            onChange={(value) => handleMaxParticipantsChange(value as number)}
-            trackStyle={{ backgroundColor: '#f87171' }}
-            handleStyle={{ borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1 }}
-          />
+          <MaxParticipantsSlider value={form.max_participants} onChange={handleMaxParticipantsChange} />
         </div>
 
         <div>
