@@ -63,73 +63,91 @@ const ActivityCreate = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 text-white">
+    <div className="card justify-center rounded-xl shadow-lg max-w-2xl mx-auto px-24 py-8 text-white">
       <h2 className="text-3xl font-bold mb-6">Create Activity</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
 
-        <input
-          name="title"
-          placeholder="Title"
-          value={form.title}
-          onChange={handleChange}
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3"
-          required
-        />
+        <div>
+          <label htmlFor="title" className="block mb-1 font-medium text-gray-300">Title</label>
+          <input
+            id="title"
+            name="title"
+            placeholder="Activity title"
+            value={form.title}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
+            required
+          />
+        </div>
 
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={form.description}
-          onChange={handleChange}
-          rows={4}
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3"
-          required
-        />
+        <div>
+          <label htmlFor="description" className="block mb-1 font-medium text-gray-300">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Describe your activity"
+            value={form.description}
+            onChange={handleChange}
+            rows={4}
+            className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
+            required
+          />
+        </div>
 
-        <input
-          name="location"
-          placeholder="Location"
-          value={form.location}
-          onChange={handleChange}
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3"
-          required
-        />
+        <div>
+          <label htmlFor="location" className="block mb-1 font-medium text-gray-300">Location</label>
+          <input
+            id="location"
+            name="location"
+            placeholder="Where will it take place?"
+            value={form.location}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
+            required
+          />
+        </div>
 
-        <input
-          type="datetime-local"
-          name="start_time"
-          value={form.start_time}
-          onChange={handleChange}
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3"
-          required
-        />
+        <div>
+          <label htmlFor="start_time" className="block mb-1 font-medium text-gray-300">Start Time</label>
+          <input
+            id="start_time"
+            type="datetime-local"
+            name="start_time"
+            value={form.start_time}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
+            required
+            step="600"
+          />
+        </div>
 
-        <input
-          type="number"
-          name="max_participants"
-          value={form.max_participants}
-          onChange={handleChange}
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3"
-          required
-        />
+        <div>
+          <label htmlFor="max_participants" className="block mb-1 font-medium text-gray-300">Max Participants</label>
+          <input
+            id="max_participants"
+            type="number"
+            name="max_participants"
+            value={form.max_participants}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
+            required
+            min={1}
+          />
+        </div>
 
-        <input
-          name="age_range"
-          placeholder="Age Range (e.g. 18-30)"
-          value={form.age_range}
-          onChange={handleChange}
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3"
-          required
-        />
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-coral text-white px-6 py-2 rounded hover:bg-coral-darker"
-        >
-          {loading ? 'Creating...' : 'Create Activity'}
-        </button>
+        <div>
+          <label htmlFor="age_range" className="block mb-1 font-medium text-gray-300">Age Range</label>
+          <input
+            id="age_range"
+            name="age_range"
+            placeholder="e.g. 18-30"
+            value={form.age_range}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
+            required
+          />
+        </div>
       </form>
     </div>
   );
