@@ -26,7 +26,7 @@ export const Register = () => {
             navigate('/users/login');
         } catch (err: unknown) {
             if (err instanceof Error) {
-                setError(err.message)
+                setError(err.message);
             } else {
                 setError('An unexpected error occurred. Please try again.');
             }
