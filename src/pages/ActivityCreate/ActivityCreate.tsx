@@ -76,7 +76,7 @@ const ActivityCreate = () => {
 
       toast.success('Activity created!', {
         position: 'bottom-center',
-        autoClose: 2000,
+        autoClose: 3000,
         theme: 'dark',
         className: 'bg-gradient text-white',
       });

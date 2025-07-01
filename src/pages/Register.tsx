@@ -17,7 +17,7 @@ export const Register = () => {
 
             toast.success('Registered successfully!', {
                 position: 'bottom-center',
-                autoClose: 2000,
+                autoClose: 3000,
                 pauseOnHover: true,
                 theme: 'dark',
                 className: 'bg-gradient text-white',

@@ -80,7 +80,7 @@ const Activity = () => {
             } else {
                 toast.success('You have joined the activity!', {
                     position: 'bottom-center',
-                    autoClose: 2000,
+                    autoClose: 3000,
                     pauseOnHover: true,
                     theme: 'dark',
                     className: 'bg-gradient text-white',
