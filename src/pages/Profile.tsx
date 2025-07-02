@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { apiFetch } from '../utils/api';
@@ -43,6 +43,7 @@ const Profile = ()  => {
             
             <div className="flex justify-between mb-4">
                 <a className="text-sm text-coral-light cursor-pointer hover:underline" onClick={() => navigate(-1)}>← Back to Activity</a>
+                <Link to="/participants/me/edit" className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>
             </div>
 
             <div className="card rounded-xl p-6 shadow-lg">
