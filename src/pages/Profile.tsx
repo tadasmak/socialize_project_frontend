@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { apiFetch } from '../utils/api';
@@ -19,32 +19,21 @@ const personalityDescriptions = [
     "Very Introverted"
 ]
 
-const userCache = new Map<string, ProfileType>();
-
 const Profile = ()  => {
-    const params = useParams();
-    const username = params.username;
     const [user, setUser] = useState<ProfileType | null>(null);
     const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (userCache.has(username!)) {
-            setUser(userCache.get(username!)!);
-            setLoading(false);
-            return;
-        }
-
         apiFetch(`/api/v1/current_user`)
         .then(response => response.json())
         .then(data => {
             setUser(data);
-            userCache.set(username!, data);
         })
         .catch(error => console.error('Error fetching user:', error))
         .finally(() => setLoading(false));
-    }, [username])
+    }, [])
 
     if (loading) return <p>Loading...</p>;
     if (!user) return <p>User not found</p>;
