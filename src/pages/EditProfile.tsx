@@ -118,7 +118,7 @@ const EditProfile = ()  => {
             value={profile.personality || 4}
             onChange={(val: number | number[]) => setProfile({ ...profile, personality: Array.isArray(val) ? val[0] : val })}
             trackStyle={{ backgroundColor: '#f87171' }}
-            handleStyle={{ backgroundColor: '#f87171', borderColor: '#f87171', zIndex: 0 }}
+            handleStyle={{ backgroundColor: '#f87171', borderColor: '#f87171', opacity: 1, zIndex: 0 }}
             railStyle={{ backgroundColor: '#333' }}
           />
           <div className="mt-2 flex justify-between text-sm text-gray-400">
