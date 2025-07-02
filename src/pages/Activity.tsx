@@ -107,6 +107,8 @@ const Activity = () => {
             </div>
 
             <div className="card rounded-xl p-6 shadow-lg">
+                {activity.participants.length >= activity.max_participants && <p className="mb-4">⚠️ <small className="text-yellow-500">This activity is full. Try other activities!</small></p>}
+
                 <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-80 object-cover rounded-lg mb-6" />
 
                 <h2 className="text-3xl font-bold">{activity.title}</h2>
