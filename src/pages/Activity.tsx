@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
+import { Tooltip } from 'react-tooltip';
 
 import { apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
@@ -147,7 +148,19 @@ const Activity = () => {
                         if (activity.participants.some(participant => participant.id === user.id)) {
                             return <div className="text-green-500 font-semibold px-4 py-2 rounded cursor-default">✅ You already participate in this activity</div>;
                         }
-                        return <button onClick={() => joinActivity()} className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer">Join Activity</button>;
+                        return (
+                            <>
+                                <button onClick={() => joinActivity()} 
+                                    className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                                    disabled={activity.participants.length >= activity.max_participants}
+                                    data-tooltip-id="join-tooltip"
+                                    data-tooltip-content="This activity is full. Try other activities!"
+                                >
+                                Join Activity
+                                </button>
+                                <Tooltip className="!bg-[#292929] !text-yellow-400" id="join-tooltip" place="bottom" delayShow={0} />
+                            </>
+                        );
                     })()}
                 </div>
             </div>
