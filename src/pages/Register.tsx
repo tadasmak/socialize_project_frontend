@@ -23,7 +23,7 @@ export const Register = () => {
                 className: 'bg-gradient text-white',
             });
 
-            navigate('/users/login');
+            navigate('/participants/login');
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setError(err.message);
@@ -47,7 +47,7 @@ export const Register = () => {
 
                     <button type="submit" className="w-full py-3 bg-coral hover:bg-coral-darker text-white rounded font-semibold transition-colors duration-100 cursor-pointer">Register</button>
 
-                    <p className="text-sm text-gray-400 text-center">Already have an account? <Link to="/users/login" className="text-[#b05c56] hover:underline">Log in</Link></p>
+                    <p className="text-sm text-gray-400 text-center">Already have an account? <Link to="/participants/login" className="text-[#b05c56] hover:underline">Log in</Link></p>
                 </form>
             </div>
         </div>

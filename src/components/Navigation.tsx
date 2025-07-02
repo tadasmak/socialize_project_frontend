@@ -30,7 +30,7 @@ export default function Navigation() {
                                 <img className="h-4 mr-2" src="../src/assets/icons/plus.svg" />
                                 New Activity
                             </Link>
-                            <Link to="/users/me" className="relative flex rounded-full p-1 text-gray-400 hover:text-white">
+                            <Link to="/participants/me" className="relative flex rounded-full p-1 text-gray-400 hover:text-white">
                                 <img src="../src/assets/icons/profile-icon-placeholder.svg" className="size-8 rounded-full mr-2" />
                                 <span className="text-white font-semibold m-auto">@{user.username}</span>
                             </Link>
@@ -38,8 +38,8 @@ export default function Navigation() {
                             </>
                         ) : (
                             <>
-                            <Link to="/users/login" className="text-sm font-medium text-white hover:underline">Login</Link>
-                            <Link to="/users/register" className="bg-coral hover:bg-coral-darker duration-100 text-sm font-medium rounded-md px-4 py-2 text-white">Register</Link>
+                            <Link to="/participants/login" className="text-sm font-medium text-white hover:underline">Login</Link>
+                            <Link to="/participants/register" className="bg-coral hover:bg-coral-darker duration-100 text-sm font-medium rounded-md px-4 py-2 text-white">Register</Link>
                             </>
                         )}
                     </div>

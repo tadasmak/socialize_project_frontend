@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { apiFetch } from '../utils/api';
 
-interface UserProfileType {
+interface ParticipantType {
     username: string;
     personality: number;
     age: number;
@@ -19,12 +19,12 @@ const personalityDescriptions = [
     "Very Introverted"
 ]
 
-const userCache = new Map<string, UserProfileType>();
+const userCache = new Map<string, ParticipantType>();
 
-const UserProfile = ()  => {
+const Participant = ()  => {
     const params = useParams();
     const username = params.username;
-    const [user, setUser] = useState<UserProfileType | null>(null);
+    const [user, setUser] = useState<ParticipantType | null>(null);
     const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
@@ -80,4 +80,4 @@ const UserProfile = ()  => {
     );
 };
 
-export default UserProfile;
+export default Participant;

@@ -51,7 +51,7 @@ export const Login = () => {
 
                     <button type="submit" className="w-full py-3 bg-coral hover:bg-coral-darker text-white rounded font-semibold transition-colors duration-100 cursor-pointer">Log in</button>
 
-                    <p className="text-sm text-gray-400 text-center">Don't have an account? <Link to="/users/register" className="text-[#b05c56] hover:underline">Register</Link></p>
+                    <p className="text-sm text-gray-400 text-center">Don't have an account? <Link to="/participants/register" className="text-[#b05c56] hover:underline">Register</Link></p>
                 </form>
             </div>
         </div>

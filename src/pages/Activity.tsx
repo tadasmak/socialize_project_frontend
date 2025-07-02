@@ -110,7 +110,7 @@ const Activity = () => {
 
                 <h2 className="text-3xl font-bold">{activity.title}</h2>
                     
-                <p className="mt-2 text-gray-400">Created by <Link to={`/users/${activity.creator.username}`} className="text-white hover:underline">@{activity.creator.username}</Link></p>
+                <p className="mt-2 text-gray-400">Created by <Link to={`/participants/${activity.creator.username}`} className="text-white hover:underline">@{activity.creator.username}</Link></p>
 
                 <div className="mt-4 grid gap-1 text-md">
                     <p>📍 <span className="text-coral-light">Location: </span><span className="text-gray-300 font-semibold">{activity.location}</span></p>
@@ -128,7 +128,7 @@ const Activity = () => {
                     <h3 className="text-lg font-semibold mb-2">Participants</h3>
                     <div className="flex flex-wrap gap-4">
                         {activity.participants.map((user) => (
-                        <Link to={`/users/${user.username}`} key={user.username} className="flex items-center space-x-2 hover:underline">
+                        <Link to={`/participants/${user.username}`} key={user.username} className="flex items-center space-x-2 hover:underline">
                             <img src='../src/assets/icons/profile-icon-placeholder.svg' className="w-8 h-8 rounded-full" />
                             <span className="text-gray-200">@{user.username}</span>
                         </Link>
@@ -139,7 +139,7 @@ const Activity = () => {
                 <div className="mt-8 flex justify-end">
                     {(() => {
                         if (!user) {
-                            return <Link to="/users/login" className="text-coral font-semibold px-4 py-2 rounded hover:underline">Login to join this activity</Link>;
+                            return <Link to="/participants/login" className="text-coral font-semibold px-4 py-2 rounded hover:underline">Login to join this activity</Link>;
                         }
                         if (user.id === activity.creator.id) {
                             return <div className="text-yellow-500 font-semibold px-4 py-2 rounded cursor-default">👑 You are the creator of this activity</div>;

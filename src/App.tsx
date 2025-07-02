@@ -10,7 +10,7 @@ import ActivityFeed from './pages/ActivityFeed';
 import Activity from './pages/Activity';
 import ActivityCreation from './pages/ActivityCreate/ActivityCreate';
 import Profile from './pages/Profile';
-import User from './pages/User';
+import Participant from './pages/Participant';
 
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -31,10 +31,10 @@ const App = () => {
             <Route path="/activities/:id" element={<Activity />} />
             <Route path="/activities/new" element={<ActivityCreation />} />
 
-            <Route path="/users/register" element={<Register />} />
-            <Route path="/users/login" element={<Login />} />
-            <Route path="/users/me" element={<Profile />} />
-            <Route path="/users/:username" element={<User />} />
+            <Route path="/participants/register" element={<Register />} />
+            <Route path="/participants/login" element={<Login />} />
+            <Route path="/participants/me" element={<Profile />} />
+            <Route path="/participants/:username" element={<Participant />} />
           </Routes>
         </main>
 
