@@ -10,6 +10,7 @@ import ActivityFeed from './pages/ActivityFeed';
 import Activity from './pages/Activity';
 import ActivityCreation from './pages/ActivityCreate/ActivityCreate';
 import Profile from './pages/Profile';
+import EditProfile from './pages/EditProfile';
 import Participant from './pages/Participant';
 
 import Register from './pages/Register';
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/participants/register" element={<Register />} />
             <Route path="/participants/login" element={<Login />} />
             <Route path="/participants/me" element={<Profile />} />
+            <Route path="/participants/me/edit" element={<EditProfile />} />
             <Route path="/participants/:username" element={<Participant />} />
           </Routes>
         </main>
