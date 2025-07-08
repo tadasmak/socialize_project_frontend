@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 import Home from './pages/Home';
 import ActivityFeed from './pages/ActivityFeed';
@@ -30,12 +31,24 @@ const App = () => {
 
             <Route path="/activities" element={<ActivityFeed />} />
             <Route path="/activities/:id" element={<Activity />} />
-            <Route path="/activities/new" element={<ActivityCreation />} />
+            <Route path="/activities/new" element={
+              <ProtectedRoute>
+                <ActivityCreation />
+              </ProtectedRoute>
+            } />
 
             <Route path="/participants/register" element={<Register />} />
             <Route path="/participants/login" element={<Login />} />
-            <Route path="/participants/me" element={<Profile />} />
-            <Route path="/participants/me/edit" element={<EditProfile />} />
+            <Route path="/participants/me" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute> 
+            } />
+            <Route path="/participants/me/edit" element={
+              <ProtectedRoute>
+                <EditProfile />
+              </ProtectedRoute> 
+            } />
             <Route path="/participants/:username" element={<Participant />} />
           </Routes>
         </main>
