@@ -153,14 +153,16 @@ const Activity = () => {
                         return (
                             <>
                                 <button onClick={() => joinActivity()} 
-                                    className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                                    className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer disabled:opacity-60"
                                     disabled={activity.participants.length >= activity.max_participants}
-                                    data-tooltip-id="join-tooltip"
-                                    data-tooltip-content="This activity is full. Try other activities!"
+                                    data-tooltip-id={activity.participants.length >= activity.max_participants ? "join-tooltip" : undefined}
+                                    data-tooltip-content={activity.participants.length >= activity.max_participants ? "This activity is full. Try other activities!" : undefined}
                                 >
                                 Join Activity
                                 </button>
-                                <Tooltip className="!bg-[#292929] !text-yellow-400" id="join-tooltip" place="bottom" delayShow={0} />
+                                {activity.participants.length >= activity.max_participants && (
+                                    <Tooltip className="!bg-[#292929] !text-yellow-400" id="join-tooltip" place="bottom" delayShow={0} />
+                                )}
                             </>
                         );
                     })()}
