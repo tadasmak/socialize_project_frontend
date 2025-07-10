@@ -17,7 +17,7 @@ import Participant from './pages/Participant';
 import Register from './pages/Register';
 import Login from './pages/Login';
 
-import Navigation from './components/Navigation';
+import Navigation from './components/Navigation/Navigation';
 
 const App = () => {
   return (
