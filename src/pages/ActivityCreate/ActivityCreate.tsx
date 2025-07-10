@@ -23,14 +23,53 @@ const ActivityCreate = () => {
     max_participants: 5
   });
 
-  const [ageRange, setAgeRange] = useState<[number, number]>([18, 26]);
-
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
+
+  const [generatingDescription, setGeneratingDescription] = useState(false);
+
+  const handleGenerateDescription = async () => {
+    setGeneratingDescription(true);
+    try {
+      const response = await apiFetch('/api/v1/activities/generate_description', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: form.title,
+          location: form.location,
+          start_time: form.start_time,
+          max_participants: form.max_participants,
+          minimum_age: ageRange[0],
+          maximum_age: ageRange[1]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate description');
+      }
+
+      const data = await response.json();
+      setForm(prev => ({ ...prev, description: data.description || '' }));
+      toast.success('Description generated!', {
+        position: 'bottom-center',
+        autoClose: 2000,
+        theme: 'dark'
+      });
+    } catch (error) {
+      toast.error('Could not generate description', {
+        position: 'bottom-center',
+        autoClose: 3000
+      })
+
+      console.log(error);
+    } finally {
+      setGeneratingDescription(false);
+    }
+  }
 
   const handleDateChange = (date: Date | null) => {
     setForm(prev => ({ ...prev, start_time: date }));
@@ -39,6 +78,8 @@ const ActivityCreate = () => {
   const handleMaxParticipantsChange = (value: number) => {
     setForm(prev => ({ ...prev, max_participants: value }));
   }
+
+  const [ageRange, setAgeRange] = useState<[number, number]>([18, 26]);
 
   const handleAgeRangeChange = (values: [number, number]) => {
     setAgeRange(values);
@@ -119,7 +160,7 @@ const ActivityCreate = () => {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col">
           <label htmlFor="description" className="block mb-1 font-medium text-gray-300">Description</label>
           <textarea
             id="description"
@@ -131,6 +172,15 @@ const ActivityCreate = () => {
             className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
             required
           />
+          <button
+            type="button"
+            onClick={handleGenerateDescription}
+            disabled={generatingDescription || !form.title || !form.location || !!form.description}
+            className="py-2 ml-auto rounded font-medium text-sm text-coral-light hover:underline cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            title="Generate description"
+          >
+            {generatingDescription ? '...' : 'Generate ✨'}
+          </button>
         </div>
 
         <div>
