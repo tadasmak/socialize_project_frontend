@@ -1,37 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import activityCache from '../utils/activityCache';
+
 import { toast } from 'react-toastify';
 import { Tooltip } from 'react-tooltip';
 
 import { apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
+import { ActivityCreateType } from '../types/activityTypes';
 import ConfirmModal from '../components/ConfirmModal'
-
-interface ActivityType {
-    title: string;
-    description: string;
-    location: string;
-    start_time: string;
-    max_participants: number;
-    age_range: string;
-    creator: {
-        id: number;
-        username: string;
-    }
-    participants: Array<{
-        id: number;
-        username: string;
-        age: number;
-    }>
-}
-
-const activityCache = new Map<string, ActivityType>();
 
 const Activity = () => {
     const params = useParams();
     const id = params.id;
-    const [activity, setActivity] = useState<ActivityType | null>(null);
+    const [activity, setActivity] = useState<ActivityCreateType | null>(null);
     
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -122,7 +105,7 @@ const Activity = () => {
                     <div className="mt-4 grid gap-1 text-md">
                         <p>📍 <span className="text-coral-light">Location: </span><span className="text-gray-300 font-semibold">{activity.location}</span></p>
                         <p>👥 <span className="text-coral-light">Participants: </span><span className="text-gray-300 font-semibold">{activity.participants.length} / {activity.max_participants}</span></p>
-                        <p>🎂 <span className="text-coral-light">Age range: </span><span className="text-gray-300 font-semibold">{activity.age_range}</span></p>
+                        <p>🎂 <span className="text-coral-light">Age range: </span><span className="text-gray-300 font-semibold">{`${activity.minimum_age} - ${activity.maximum_age}`}</span></p>
                         <p>📅 <span className="text-coral-light">Start time: </span><span className="text-gray-300 font-semibold">{new Date(activity.start_time).toLocaleString()}</span></p>
                     </div>
 
