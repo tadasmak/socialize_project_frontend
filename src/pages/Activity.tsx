@@ -107,7 +107,7 @@ const Activity = () => {
                 
                 <div className="flex justify-between mb-4">
                     <Link to="/activities" className="text-sm text-coral-light hover:underline cursor-pointer">← Back to Activities</Link>
-                    { user && user.id === activity.creator.id && (<button className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</button>) }
+                    { user && user.id === activity.creator.id && (<Link to={`/activities/${id}/edit`} className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>) }
                 </div>
 
                 <div className="card rounded-xl p-6 shadow-lg">
