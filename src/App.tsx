@@ -9,9 +9,10 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
 import ActivityFeed from './pages/ActivityFeed';
 import Activity from './pages/Activity';
-import ActivityCreation from './pages/ActivityCreate/ActivityCreate';
+import ActivityCreation from './pages/ActivityForm/ActivityCreate';
+import ActivityEdit from './pages/ActivityForm/ActivityEdit';
 import Profile from './pages/Profile';
-import EditProfile from './pages/EditProfile';
+import EditProfile from './pages/ProfileEdit';
 import Participant from './pages/Participant';
 
 import Register from './pages/Register';
@@ -34,6 +35,11 @@ const App = () => {
             <Route path="/activities/new" element={
               <ProtectedRoute>
                 <ActivityCreation />
+              </ProtectedRoute>
+            } />
+            <Route path="/activities/:id/edit" element={
+              <ProtectedRoute>
+                <ActivityEdit />
               </ProtectedRoute>
             } />
 
