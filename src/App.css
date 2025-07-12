@@ -17,7 +17,7 @@
 .text-coral-light {
   color: #d6837f;
 }
-.hover\:bg-coral-darker:hover {
+.hover\:bg-coral-darker:hover:not(:disabled) {
   background-color: #a44f4a;
 }
 .focus\:ring-bg-coral:focus {
