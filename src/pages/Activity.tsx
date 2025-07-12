@@ -93,7 +93,7 @@ const Activity = () => {
                     { user && user.id === activity.creator.id && (<Link to={`/activities/${id}/edit`} className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>) }
                 </div>
 
-                <div className="card rounded-xl p-6 shadow-lg">
+                <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl p-6 shadow-lg">
                     {activity.participants.length >= activity.max_participants && <p className="mb-4">⚠️ <small className="text-yellow-500">This activity is full. Try other activities!</small></p>}
 
                     <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-80 object-cover rounded-lg mb-6" />

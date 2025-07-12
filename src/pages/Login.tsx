@@ -39,7 +39,7 @@ export const Login = () => {
 
     return (
         <div className="lg:w-1/2 m-auto">
-            <div className="card flex justify-center rounded-xl p-6 shadow-lg">
+            <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 flex justify-center rounded-xl p-6 shadow-lg">
                 <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6 p-8 rounded-xl">
                     <h2 className="text-2xl font-semibold text-white text-center">Sign in</h2>
 

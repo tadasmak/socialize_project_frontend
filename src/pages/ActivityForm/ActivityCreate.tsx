@@ -142,7 +142,7 @@ const ActivityCreate = () => {
   };
 
   return (
-    <div className="card justify-center rounded-xl shadow-lg max-w-2xl mx-auto px-8 md:px-16 py-8 text-white">
+    <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 justify-center rounded-xl shadow-lg max-w-2xl mx-auto px-8 md:px-16 py-8 text-white">
       <h2 className="text-3xl font-bold mb-6">Create Activity</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">

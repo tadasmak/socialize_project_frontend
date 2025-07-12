@@ -162,7 +162,7 @@ const ActivityEdit = () => {
                 <Link to={`/activities/${id}`} className="text-sm text-coral-light hover:underline cursor-pointer">← Back to Activity</Link>
             </div>
 
-            <div className="card rounded-xl shadow-lg px-8 md:px-16 py-8">
+            <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl shadow-lg px-8 md:px-16 py-8">
                 <h2 className="text-3xl font-bold mb-6">Update Activity</h2>
 
                 <form onSubmit={handleSubmit} className="space-y-4">

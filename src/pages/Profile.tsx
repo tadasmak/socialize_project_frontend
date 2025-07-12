@@ -46,7 +46,7 @@ const Profile = ()  => {
                 <Link to="/participants/me/edit" className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>
             </div>
 
-            <div className="card rounded-xl p-6 shadow-lg">
+            <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl p-6 shadow-lg">
                 <div className="flex items-center space-x-4 mb-6">
                     <img src="../src/assets/icons/profile-icon-placeholder.svg" className="w-16 h-16 rounded-full" />
                     <div>
