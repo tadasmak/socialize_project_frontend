@@ -84,9 +84,9 @@ const ActivityFeed: React.FC = () => {
             </div>
 
             <div className="flex justify-center mt-8 gap-2">
-                <button onClick={() => goToPage(page - 1)} disabled={page <= 1} className="px-4 py-2 w-24 rounded bg-coral text-white disabled:opacity-50">Previous</button>
+                <button onClick={() => goToPage(page - 1)} disabled={page <= 1} className="px-4 py-2 w-24 rounded bg-coral hover:bg-coral-darker text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
                 <span className="px-4 py-2">{page}</span>
-                <button onClick={() => goToPage(page + 1)} className="px-4 py-2 w-24 rounded bg-coral text-white disabled:opacity-50">Next</button>
+                <button onClick={() => goToPage(page + 1)} className="px-4 py-2 w-24 rounded bg-coral hover:bg-coral-darker text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
             </div>
         </div>
     );
