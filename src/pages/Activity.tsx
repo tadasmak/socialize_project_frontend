@@ -15,9 +15,17 @@ const Activity = () => {
     const params = useParams();
     const id = params.id;
     const [activity, setActivity] = useState<ActivityCreateType | null>(null);
-    
-    const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    type ConfirmModalState = {
+        action: 'join' | 'leave' | 'cancel' | 'delete';
+        title: string;
+        description: string;
+        confirmText?: string;
+        onConfirm: () => void;
+    } | null;
+    
+    const [confirmModalState, setConfirmModalState] = useState<ConfirmModalState>(null);
 
     const { user } = useAuth();
 
@@ -170,14 +178,34 @@ const Activity = () => {
                                 return (
                                     <div>
                                         <div className="text-green-500 font-semibold px-4 py-2 rounded cursor-default">✅ You already participate in this activity</div>
-                                        <div onClick={() => leaveActivity()} className="text-red-500 text-right px-4 cursor-pointer hover:underline">Leave activity</div>
+                                        <div
+                                            onClick={() => setConfirmModalState({
+                                                action: "leave",
+                                                title: "Leave this activity?",
+                                                description: "Are you sure you want to leave this activity?",
+                                                confirmText: "Yes, leave",
+                                                onConfirm: async () => {
+                                                    await leaveActivity();
+                                                    setConfirmModalState(null);
+                                                }
+                                            })}
+                                            className="text-red-500 text-right px-4 cursor-pointer hover:underline">Leave activity</div>
                                     </div>
                                 )
                             }
                             return (
                                 <>
                                     <button
-                                        onClick={() => setShowConfirmModal(true)}
+                                        onClick={() => setConfirmModalState({
+                                            action: "join",
+                                            title: "Join this activity?",
+                                            description: "Are you sure you want to join this activity?",
+                                            confirmText: "Yes, join",
+                                            onConfirm: async () => {
+                                                await joinActivity();
+                                                setConfirmModalState(null);
+                                            }
+                                        })}
                                         className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer disabled:opacity-60"
                                         disabled={activity.participants.length >= activity.max_participants}
                                         data-tooltip-id={activity.participants.length >= activity.max_participants ? "join-tooltip" : undefined}
@@ -195,15 +223,17 @@ const Activity = () => {
                 </div>
             </div>
 
-            <ConfirmModal
-                isOpen={showConfirmModal}
-                onClose={() => setShowConfirmModal(false)}
-                title="Join this activity?"
-                description="Are you sure you want to join this activity?"
-                onConfirm={joinActivity}
-                confirmText="Yes, join"
-                cancelText="Cancel"
-            />
+            {confirmModalState && (
+                <ConfirmModal
+                    isOpen={true}
+                    onClose={() => setConfirmModalState(null)}
+                    title={confirmModalState.title}
+                    description={confirmModalState.description}
+                    confirmText={confirmModalState.confirmText}
+                    cancelText="Cancel"
+                    onConfirm={confirmModalState.onConfirm}
+                />
+            )}
         </>
     );
 };
