@@ -81,6 +81,38 @@ const Activity = () => {
         }
     }
 
+    const leaveActivity = async () => {
+        try {
+            const response = await apiFetch(`/api/v1/activities/${id}/leave`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                
+                const errorMessage = data?.errors || 'Failed to leave activity';
+                alert(errorMessage);
+                return;
+            } else {
+                toast.info('You have left the activity.', {
+                    position: 'bottom-center',
+                    autoClose: 3000,
+                    pauseOnHover: true,
+                    theme: 'dark',
+                    className: 'bg-gradient text-white'
+                })
+
+                fetchActivity();
+            }
+        } catch (error) {
+            alert('An error occured while trying to leave the activity');
+            console.error(error);
+        }
+    }
+
     if (loading) return <p>Loading...</p>;
     if (!activity) return <p>Activity not found</p>;
 
@@ -135,7 +167,12 @@ const Activity = () => {
                                 return <div className="text-yellow-500 font-semibold px-4 py-2 rounded cursor-default">👑 You are the creator of this activity</div>;
                             }
                             if (activity.participants.some(participant => participant.id === user.id)) {
-                                return <div className="text-green-500 font-semibold px-4 py-2 rounded cursor-default">✅ You already participate in this activity</div>;
+                                return (
+                                    <div>
+                                        <div className="text-green-500 font-semibold px-4 py-2 rounded cursor-default">✅ You already participate in this activity</div>
+                                        <div onClick={() => leaveActivity()} className="text-red-500 text-right px-4 cursor-pointer hover:underline">Leave activity</div>
+                                    </div>
+                                )
                             }
                             return (
                                 <>
