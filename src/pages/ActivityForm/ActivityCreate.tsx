@@ -194,6 +194,8 @@ const ActivityCreate = () => {
             className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral"
             required
           />
+          <p className="mt-1 text-yellow-400">⚠️ <small>Avoid sharing an exact address. Activities are visible to everyone until full or confirmed.</small>
+          </p>
         </div>
 
         <div>
