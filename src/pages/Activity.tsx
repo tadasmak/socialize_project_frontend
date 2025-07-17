@@ -210,7 +210,37 @@ const Activity = () => {
                                 return <Link to="/participants/login" className="text-coral font-semibold px-4 py-2 rounded hover:underline">Login to join this activity</Link>;
                             }
                             if (isCreator) {
-                                return <div className="text-yellow-500 font-semibold px-4 py-2 rounded cursor-default">👑 You are the creator of this activity</div>;
+                                return (
+                                    <div className="flex flex-col items-end">
+                                        <div className="text-yellow-500 font-semibold py-2 rounded cursor-default">👑 You are the creator of this activity</div>
+                                        {!isConfirmed && (
+                                            <>
+                                                <button
+                                                    onClick={() => setConfirmModalState({
+                                                        action: "confirm",
+                                                        title: "Confirm this activity?",
+                                                        description: "This will lock the participant list. Are you sure you want to confirm?",
+                                                        confirmText: "Yes, confirm",
+                                                        onConfirm: async () => {
+                                                            await confirmActivity();
+                                                            setConfirmModalState(null);
+                                                        }
+                                                    })}
+                                                    className="ml-4 mt-4 rounded bg-green-600 text-white font-semibold px-4 py-2 cursor-pointer hover:not-disabled:bg-green-700 disabled:opacity-60"
+                                                    disabled={!canConfirm}
+                                                >
+                                                    ✅ Confirm Activity
+                                                </button>
+                                                { !canConfirm && (
+                                                    <div className="mt-2 text-sm text-end text-gray-400 space-y-1">
+                                                        {!isFull && <p>Activity must be <span className="text-white font-medium">full</span> before it can be confirmed.</p>}
+                                                        {!isWithinOneWeek && <p>Activity can only be confirmed <span className="text-white font-medium">within one week</span> of its start date.</p>}
+                                                    </div>
+                                                ) }
+                                            </>
+                                        )}
+                                    </div>
+                                )
                             }
                             if (activity.participants.some(participant => participant.id === user.id)) {
                                 return (
