@@ -8,17 +8,17 @@ import { Tooltip } from 'react-tooltip';
 
 import { apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
-import { ActivityCreateType } from '../types/activityTypes';
+import { ActivityType } from '../types/activityTypes';
 import ConfirmModal from '../components/ConfirmModal'
 
 const Activity = () => {
     const params = useParams();
     const id = params.id;
-    const [activity, setActivity] = useState<ActivityCreateType | null>(null);
+    const [activity, setActivity] = useState<ActivityType | null>(null);
     const [loading, setLoading] = useState(true);
 
     type ConfirmModalState = {
-        action: 'join' | 'leave' | 'cancel' | 'delete';
+        action: 'join' | 'leave' | 'cancel' | 'delete' | 'confirm';
         title: string;
         description: string;
         confirmText?: string;
@@ -124,17 +124,23 @@ const Activity = () => {
     if (loading) return <p>Loading...</p>;
     if (!activity) return <p>Activity not found</p>;
 
+    const isCreator = user && user.id === activity.creator.id;
+    const isFull = activity.participants.length >= activity.max_participants;
+    const isWithinOneWeek = new Date(activity.start_time).getTime() - Date.now() < 7 * 24 * 60 * 60 * 1000;
+    const isConfirmed = activity.status === "confirmed";
+    const canConfirm = isCreator && isFull && isWithinOneWeek && !isConfirmed
+
     return (
         <>
             <div className="max-w-4xl mx-auto p-6 text-white">
                 
                 <div className="flex justify-between mb-4">
                     <Link to="/activities" className="text-sm text-coral-light hover:underline cursor-pointer">← Back to Activities</Link>
-                    { user && user.id === activity.creator.id && (<Link to={`/activities/${id}/edit`} className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>) }
+                    { isCreator && (<Link to={`/activities/${id}/edit`} className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>) }
                 </div>
 
                 <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl p-6 shadow-lg">
-                    {activity.participants.length >= activity.max_participants && <p className="mb-4">⚠️ <small className="text-yellow-500">This activity is full. Try other activities!</small></p>}
+                    {isFull && <p className="mb-4">⚠️ <small className="text-yellow-500">This activity is full. Try other activities!</small></p>}
 
                     <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-80 object-cover rounded-lg mb-6" />
 
@@ -171,7 +177,7 @@ const Activity = () => {
                             if (!user) {
                                 return <Link to="/participants/login" className="text-coral font-semibold px-4 py-2 rounded hover:underline">Login to join this activity</Link>;
                             }
-                            if (user.id === activity.creator.id) {
+                            if (isCreator) {
                                 return <div className="text-yellow-500 font-semibold px-4 py-2 rounded cursor-default">👑 You are the creator of this activity</div>;
                             }
                             if (activity.participants.some(participant => participant.id === user.id)) {
@@ -207,13 +213,13 @@ const Activity = () => {
                                             }
                                         })}
                                         className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer disabled:opacity-60"
-                                        disabled={activity.participants.length >= activity.max_participants}
-                                        data-tooltip-id={activity.participants.length >= activity.max_participants ? "join-tooltip" : undefined}
-                                        data-tooltip-content={activity.participants.length >= activity.max_participants ? "This activity is full. Try other activities!" : undefined}
+                                        disabled={isFull}
+                                        data-tooltip-id={isFull ? "join-tooltip" : undefined}
+                                        data-tooltip-content={isFull ? "This activity is full. Try other activities!" : undefined}
                                     >
-                                    Join Activity
+                                        Join Activity
                                     </button>
-                                    {activity.participants.length >= activity.max_participants && (
+                                    {isFull && (
                                         <Tooltip className="!bg-[#292929] !text-yellow-400" id="join-tooltip" place="bottom" delayShow={0} />
                                     )}
                                 </>

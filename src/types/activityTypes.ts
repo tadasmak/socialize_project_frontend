@@ -1,4 +1,4 @@
-export interface ActivityCreateType {
+export interface ActivityType {
     title: string;
     description: string;
     location: string;
@@ -6,6 +6,7 @@ export interface ActivityCreateType {
     max_participants: number;
     minimum_age: number;
     maximum_age: number;
+    status: string;
     creator: {
         id: number;
         username: string;
