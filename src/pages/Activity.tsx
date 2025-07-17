@@ -164,14 +164,14 @@ const Activity = () => {
 
     return (
         <>
-            <div className="max-w-4xl mx-auto p-6 text-white">
+            <div className="max-w-3xl mx-auto text-white">
                 
                 <div className="flex justify-between mb-4">
                     <Link to="/activities" className="text-sm text-coral-light hover:underline cursor-pointer">← Back to Activities</Link>
                     { isCreator && (<Link to={`/activities/${id}/edit`} className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>) }
                 </div>
 
-                <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl p-6 shadow-lg">
+                <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl py-6 px-8 shadow-lg">
                     {isFull && <p className="mb-4">⚠️ <small className="text-yellow-500">This activity is full. Try other activities!</small></p>}
 
                     <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-80 object-cover rounded-lg mb-6" />
