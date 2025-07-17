@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from 'react-router-dom';
 
-import { apiFetch } from '../utils/api';
+import { apiFetch } from '../../utils/api';
 
 type Activity = {
     id: number;

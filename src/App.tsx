@@ -7,7 +7,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import Home from './pages/Home';
-import ActivityFeed from './pages/ActivityFeed';
+import ActivityFeed from './pages/ActivityFeed/ActivityFeed';
 import Activity from './pages/Activity';
 import ActivityCreation from './pages/ActivityForm/ActivityCreate';
 import ActivityEdit from './pages/ActivityForm/ActivityEdit';
