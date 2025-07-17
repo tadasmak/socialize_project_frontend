@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import { apiFetch } from '../../utils/api';
+
+import ActivityCard from '../../components/Activity/ActivityCard';
 
 type Activity = {
     id: number;
@@ -67,19 +69,7 @@ const ActivityFeed: React.FC = () => {
 
             <div className="mt-6 grid justify-center grid-cols-1 lg:grid-cols-2 gap-4">
                 {activities.map((activity) => (
-                   <Link to={`/activities/${activity.id}`} key={activity.id} className="bg-[#292929] ring-1 ring-black ring-opacity-5 shadow-lg flex max-w-175 rounded-lg p-3">
-                        <div className="flex items-center min-w-45 w-45 aspect-square mr-4">
-                            <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-full object-cover rounded-lg" />
-                        </div>
-                        <div className="px-2 flex-grow overflow-hidden">
-                            <h2 className="font-semibold truncate text-2xl mb-1">{activity.title}</h2>
-                            <p className="truncate mb-2">{activity.description}</p>
-                            <p className="truncate"><span className="text-coral-light">Location: </span>{activity.location}</p>
-                            <p><span className="text-coral-light">Participants: </span>{activity.participants_count}/{activity.max_participants}</p>
-                            <p><span className="text-coral-light">Age Range: </span>{activity.age_range}</p>
-                            <p className="truncate"><span className="text-coral-light">Start time: </span>{new Date(activity.start_time).toLocaleString()}</p>
-                        </div>
-                    </Link> 
+                    <ActivityCard key={activity.id} {...activity} />
                 ))}
             </div>
 
