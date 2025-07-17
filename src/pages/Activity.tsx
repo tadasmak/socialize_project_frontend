@@ -121,6 +121,38 @@ const Activity = () => {
         }
     }
 
+    const confirmActivity = async () => {
+        try {
+            const response = await apiFetch(`/api/v1/activities/${id}/confirm`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+
+                const errorMessage = data?.errors || 'Failed to confirm activity';
+                alert(errorMessage);
+                return;
+            } else {
+                toast.success('The activity has been confirmed', {
+                    position: 'bottom-center',
+                    autoClose: 3000,
+                    pauseOnHover: true,
+                    theme: 'dark',
+                    className: 'bg-gradient text-white'
+                })
+
+                fetchActivity();
+            }
+        } catch (error) {
+            alert('An error has occured while trying to confirm the activity');
+            console.error(error);
+        }
+    }
+
     if (loading) return <p>Loading...</p>;
     if (!activity) return <p>Activity not found</p>;
 
