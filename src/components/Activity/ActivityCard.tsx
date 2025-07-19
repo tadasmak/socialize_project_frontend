@@ -6,10 +6,11 @@ type ActivityCardProps = {
     title: string;
     description: string;
     location: string;
-    start_time: string;
+    start_time: Date;
     participants_count: number;
     max_participants: number;
-    age_range: string;
+    minimum_age: number;
+    maximum_age: number;
 }
 
 const ActivityCard: React.FC<ActivityCardProps> = ({
@@ -20,7 +21,8 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
     start_time,
     participants_count,
     max_participants,
-    age_range
+    minimum_age,
+    maximum_age
 }) => {
     return (
         <Link to={`/activities/${id}`} key={id} className="bg-[#292929] ring-1 ring-black ring-opacity-5 shadow-lg flex max-w-175 rounded-lg p-3">
@@ -32,7 +34,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
             <p className="truncate mb-2">{description}</p>
             <p className="truncate"><span className="text-coral-light">Location: </span>{location}</p>
             <p><span className="text-coral-light">Participants: </span>{participants_count}/{max_participants}</p>
-            <p><span className="text-coral-light">Age Range: </span>{age_range}</p>
+            <p><span className="text-coral-light">Age Range: </span>{minimum_age} - {maximum_age}</p>
             <p className="truncate"><span className="text-coral-light">Start time: </span>{new Date(start_time).toLocaleString()}</p>
         </div>
     </Link>

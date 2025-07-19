@@ -8,13 +8,13 @@ import { Tooltip } from 'react-tooltip';
 
 import { apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
-import { ActivityType } from '../types/activityTypes';
+import { ActivityDetailType } from '../types/activityTypes';
 import ConfirmModal from '../components/ConfirmModal'
 
 const Activity = () => {
     const params = useParams();
     const id = params.id;
-    const [activity, setActivity] = useState<ActivityType | null>(null);
+    const [activity, setActivity] = useState<ActivityDetailType | null>(null);
     const [loading, setLoading] = useState(true);
 
     type ConfirmModalState = {

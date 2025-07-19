@@ -3,10 +3,14 @@ import { useEffect, useState } from 'react';
 
 import { apiFetch } from '../utils/api';
 
+import { ActivityCardType } from '../types/activityTypes';
+
 interface ProfileType {
     username: string;
     personality: number;
     age: number;
+    joined_activities: ActivityCardType[];
+    created_activities: ActivityCardType[];
 }
 
 const personalityDescriptions = [
@@ -50,7 +54,7 @@ const Profile = ()  => {
                 <div className="flex items-center space-x-4 mb-6">
                     <img src="../src/assets/icons/profile-icon-placeholder.svg" className="w-16 h-16 rounded-full" />
                     <div>
-                        <h2 className="text-3xl font-semibold">@{user.username}</h2>
+                        <h1 className="text-3xl font-semibold">@{user.username}</h1>
                         <p className="text-gray-400">🎂 Age: { user.age ? <span className="text-gray-300 font-semibold">{user.age}</span> : <span>not given</span>}</p>
                     </div>
                 </div>

@@ -1,8 +1,8 @@
-export interface ActivityType {
+export interface ActivityDetailType {
     title: string;
     description: string;
     location: string;
-    start_time: string;
+    start_time: Date;
     max_participants: number;
     minimum_age: number;
     maximum_age: number;
@@ -16,6 +16,19 @@ export interface ActivityType {
         username: string;
         age: number;
     }>
+    participants_count: number;
+}
+
+export interface ActivityCardType {
+    id: number;
+    title: string,
+    description: string,
+    location: string,
+    start_time: Date,
+    max_participants: number,
+    minimum_age: number,
+    maximum_age: number,
+    participants_count: number
 }
 
 export interface ActivityEditType {

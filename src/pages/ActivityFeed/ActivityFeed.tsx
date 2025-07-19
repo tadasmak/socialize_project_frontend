@@ -3,23 +3,14 @@ import { useSearchParams } from 'react-router-dom';
 
 import { apiFetch } from '../../utils/api';
 
-import ActivityCard from '../../components/Activity/ActivityCard';
+import { ActivityCardType } from '../../types/activityTypes';
 
-type Activity = {
-    id: number;
-    title: string;
-    description: string;
-    location: string;
-    start_time: string;
-    participants_count: number;
-    max_participants: number;
-    age_range: string;
-}
+import ActivityCard from '../../components/Activity/ActivityCard';
 
 const PAGE_SIZE = 10;
 
 const ActivityFeed: React.FC = () => {
-    const [activities, setActivities] = useState<Activity[]>([]);
+    const [activities, setActivities] = useState<ActivityCardType[]>([]);
     const [loading, setLoading] = useState(true);
     
     const [searchParams, setSearchParams] = useSearchParams();
