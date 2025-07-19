@@ -83,6 +83,17 @@ const Profile = ()  => {
                     </div>
                 </div>
             )}
+
+            { user.joined_activities.length > 0 && (
+                <div className="mt-8">
+                    <h2 className="text-2xl font-semibold">Created activities</h2>
+                    <div className="grid grid-cols-1 gap-2 mt-4">
+                        {user.joined_activities.map((activity) => (
+                            <ActivityCard key={activity.id} {...activity} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
