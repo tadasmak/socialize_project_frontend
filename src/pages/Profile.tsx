@@ -5,6 +5,8 @@ import { apiFetch } from '../utils/api';
 
 import { ActivityCardType } from '../types/activityTypes';
 
+import ActivityCard from '../components/Activity/ActivityCard';
+
 interface ProfileType {
     username: string;
     personality: number;
@@ -70,6 +72,17 @@ const Profile = ()  => {
                     </div>
                 </div>
             </div>
+
+            { user.created_activities.length > 0 && (
+                <div className="mt-8">
+                    <h2 className="text-2xl font-semibold">Created activities</h2>
+                    <div className="grid grid-cols-1 gap-2 mt-4">
+                        {user.created_activities.map((activity) => (
+                            <ActivityCard key={activity.id} {...activity} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
