@@ -5,11 +5,11 @@ import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import MaxParticipantsSlider from './MaxParticipantsSlider';
-import AgeRangeSlider from './AgeRangeSlider';
+import MaxParticipantsSlider from '../components/ActivityForm/MaxParticipantsSlider';
+import AgeRangeSlider from '../components/ActivityForm/AgeRangeSlider';
 
-import { apiFetch } from '../../utils/api';
-import { useAuth } from '../../context/AuthContext';
+import { apiFetch } from '../utils/api';
+import { useAuth } from '../context/AuthContext';
 
 const ActivityCreate = () => {
   const { user } = useAuth();

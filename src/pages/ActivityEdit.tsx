@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import activityCache from '../../utils/activityCache';
+import activityCache from '../utils/activityCache';
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { apiFetch } from '../../utils/api';
-import { useAuth } from '../../context/AuthContext';
-import { ActivityEditType } from '../../types/activityTypes';
+import { apiFetch } from '../utils/api';
+import { useAuth } from '../context/AuthContext';
+import { ActivityEditType } from '../types/activityTypes';
 
-import MaxParticipantsSlider from './MaxParticipantsSlider';
-import AgeRangeSlider from './AgeRangeSlider';
+import MaxParticipantsSlider from '../components/ActivityForm/MaxParticipantsSlider';
+import AgeRangeSlider from '../components/ActivityForm/AgeRangeSlider';
 
 const defaultActivity: ActivityEditType = {
     title: '',
