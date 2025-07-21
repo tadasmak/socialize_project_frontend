@@ -44,6 +44,8 @@ const Profile = ()  => {
     if (loading) return <p>Loading...</p>;
     if (!user) return <p>User not found</p>;
 
+    const totalParticipatingActivities = user.created_activities.length + user.joined_activities.length;
+
     return (
         <div className="max-w-2xl mx-auto p-6 text-white">
             
@@ -86,7 +88,7 @@ const Profile = ()  => {
 
             { user.joined_activities.length > 0 && (
                 <div className="mt-8">
-                    <h2 className="text-2xl font-semibold">Created activities</h2>
+                    <h2 className="text-2xl font-semibold">Joined activities</h2>
                     <div className="grid grid-cols-1 gap-2 mt-4">
                         {user.joined_activities.map((activity) => (
                             <ActivityCard key={activity.id} {...activity} />
@@ -94,6 +96,8 @@ const Profile = ()  => {
                     </div>
                 </div>
             )}
+
+            { totalParticipatingActivities > 0 && <p className="text-center mt-3"><span className="font-bold">{totalParticipatingActivities} / 3</span> participating activities {totalParticipatingActivities == 3 && '(limit reached)'}</p> }
         </div>
     );
 };
