@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from 'react-router-dom';
 
-import { apiFetch } from '../../utils/api';
+import { apiFetch } from '../utils/api';
 
-import { ActivityCardType } from '../../types/activityTypes';
+import { ActivityCardType } from '../types/activityTypes';
 
-import ActivityCard from '../../components/Activity/ActivityCard';
+import ActivityCard from '../components/Activity/ActivityCard';
 
 const PAGE_SIZE = 10;
 
