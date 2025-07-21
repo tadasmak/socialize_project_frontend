@@ -165,8 +165,7 @@ const Activity = () => {
 
     return (
         <>
-            <div className="max-w-3xl mx-auto text-white">
-                
+            <div className="max-w-3xl mx-auto text-white">  
                 <div className="flex justify-between mb-4">
                     <Link to="/activities" className="text-sm text-coral-light hover:underline cursor-pointer">← Back to Activities</Link>
                     { isCreator && (<Link to={`/activities/${id}/edit`} className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>) }
@@ -177,7 +176,7 @@ const Activity = () => {
 
                     <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-80 object-cover rounded-lg mb-6" />
 
-                    <h2 className="text-3xl font-bold">{activity.title}</h2>
+                    <h1 className="text-3xl font-bold">{activity.title}</h1>
                         
                     <p className="mt-2 text-gray-400">Created by <Link to={`/participants/${activity.creator.username}`} className="text-white hover:underline">@{activity.creator.username}</Link></p>
 

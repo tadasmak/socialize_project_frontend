@@ -54,7 +54,7 @@ const ActivityFeed: React.FC = () => {
     if (!activities.length) return <div>No activities found.</div>;
 
     return (
-        <div>
+        <>
             <h1 className="text-5xl font-bold">Activity Feed</h1>
             <p className="text-xl mt-6">This is the activity page. You can find activities here that you can choose to participate in.</p>
 
@@ -69,7 +69,7 @@ const ActivityFeed: React.FC = () => {
                 <span className="px-4 py-2">{page}</span>
                 <button onClick={() => goToPage(page + 1)} className="px-4 py-2 w-24 rounded bg-coral hover:bg-coral-darker text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
             </div>
-        </div>
+        </>
     );
 };
 

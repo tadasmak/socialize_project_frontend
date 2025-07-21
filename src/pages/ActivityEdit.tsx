@@ -163,7 +163,7 @@ const ActivityEdit = () => {
             </div>
 
             <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl shadow-lg px-8 md:px-16 py-8">
-                <h2 className="text-3xl font-bold mb-6">Update Activity</h2>
+                <h1 className="text-3xl font-bold mb-6">Update Activity</h1>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>

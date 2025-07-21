@@ -41,7 +41,7 @@ export const Login = () => {
         <div className="lg:w-1/2 m-auto">
             <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 flex justify-center rounded-xl p-6 shadow-lg">
                 <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6 p-8 rounded-xl">
-                    <h2 className="text-2xl font-semibold text-white text-center">Sign in</h2>
+                    <h1 className="text-2xl font-semibold text-white text-center">Sign in</h1>
 
                     {error && ( <p className="text-red-400 text-sm text-center bg-red-900/20 p-2 rounded"> {error}</p> )}
 

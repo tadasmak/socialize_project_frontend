@@ -51,7 +51,6 @@ const Participant = ()  => {
 
     return (
         <div className="max-w-2xl mx-auto p-6 text-white">
-            
             <div className="flex justify-between mb-4">
                 <a className="text-sm text-coral-light cursor-pointer hover:underline" onClick={() => navigate(-1)}>← Back to Activity</a>
             </div>
@@ -60,13 +59,13 @@ const Participant = ()  => {
                 <div className="flex items-center space-x-4 mb-6">
                     <img src="../src/assets/icons/profile-icon-placeholder.svg" className="w-16 h-16 rounded-full" />
                     <div>
-                        <h2 className="text-3xl font-semibold">@{user.username}</h2>
+                        <h1 className="text-3xl font-semibold">@{user.username}</h1>
                         <p className="text-gray-400">🎂 Age: { user.age ? <span className="text-gray-300 font-semibold">{user.age}</span> : <span>not given</span>}</p>
                     </div>
                 </div>
 
                 <div className="mt-6">
-                    <h4 className="text-md font-medium mb-2">Personality: <span className="text-gray-400 font-normal">({personalityDescriptions[user.personality - 1] || "unknown"})</span></h4>
+                    <p className="text-md font-medium mb-2">Personality: <span className="text-gray-400 font-normal">({personalityDescriptions[user.personality - 1] || "unknown"})</span></p>
                     <div className="relative h-4 rounded-full bg-coral">
                         { user.personality && <div className="absolute top-1/2 w-4 h-4 rounded-full bg-white border-2 border-coral -translate-y-1/2" style={{ left: `${((user.personality - 1) / 6) * 100}%` }}></div>}
                     </div>
