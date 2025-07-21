@@ -160,7 +160,8 @@ const Activity = () => {
     const isFull = activity.participants.length >= activity.max_participants;
     const isWithinOneWeek = new Date(activity.start_time).getTime() - Date.now() < 7 * 24 * 60 * 60 * 1000;
     const isConfirmed = activity.status === "confirmed";
-    const canConfirm = isCreator && isFull && isWithinOneWeek && !isConfirmed
+    const canConfirm = isCreator && isFull && isWithinOneWeek && !isConfirmed;
+    const userParticipating = user && activity.participants.some(participant => participant.id === user.id);
 
     return (
         <>
@@ -205,88 +206,93 @@ const Activity = () => {
                     </div>
 
                     <div className="mt-8 flex justify-end">
-                        {(() => {
-                            if (!user) {
-                                return <Link to="/participants/login" className="text-coral font-semibold px-4 py-2 rounded hover:underline">Login to join this activity</Link>;
-                            }
-                            if (isCreator) {
+                        <div className="flex flex-col items-end">
+                            {(() => {
+                                if (!user) {
+                                    return <Link to="/participants/login" className="text-coral font-semibold py-2 rounded hover:underline">Login to join this activity</Link>;
+                                }
+                                if (isCreator) {
+                                    return (
+                                        <>
+                                            <p className="text-yellow-500 font-semibold py-2 rounded cursor-default">👑 You are the creator of this activity</p>
+                                            {!isConfirmed && (
+                                                <>
+                                                    <button
+                                                        onClick={() => setConfirmModalState({
+                                                            action: "confirm",
+                                                            title: "Confirm this activity?",
+                                                            description: "This will lock the participant list. Are you sure you want to confirm?",
+                                                            confirmText: "Yes, confirm",
+                                                            onConfirm: async () => {
+                                                                await confirmActivity();
+                                                                setConfirmModalState(null);
+                                                            }
+                                                        })}
+                                                        className="ml-4 mt-4 rounded bg-green-600 text-white font-semibold px-4 py-2 cursor-pointer hover:not-disabled:bg-green-700 disabled:opacity-60"
+                                                        disabled={!canConfirm}
+                                                    >
+                                                        ✅ Confirm Activity
+                                                    </button>
+                                                    { !canConfirm && (
+                                                        <div className="mt-2 text-sm text-end text-gray-400 space-y-1">
+                                                            {!isFull && <p>Activity must be <span className="text-white font-medium">full</span> before it can be confirmed.</p>}
+                                                            {!isWithinOneWeek && <p>Activity can only be confirmed <span className="text-white font-medium">within one week</span> of its start date.</p>}
+                                                        </div>
+                                                    ) }
+                                                </>
+                                            )}
+                                        </>
+                                    )
+                                }
+                                if (userParticipating) {
+                                    return (
+                                        <>
+                                            <p className="text-green-500 font-semibold py-2 rounded cursor-default">✅ You already participate in this activity</p>
+                                            <button
+                                                onClick={() => setConfirmModalState({
+                                                    action: "leave",
+                                                    title: "Leave this activity?",
+                                                    description: "Are you sure you want to leave this activity?",
+                                                    confirmText: "Yes, leave",
+                                                    onConfirm: async () => {
+                                                        await leaveActivity();
+                                                        setConfirmModalState(null);
+                                                    }
+                                                })}
+                                                className="text-red-500 text-right mt-4 cursor-pointer hover:underline"
+                                            >
+                                                Leave activity
+                                            </button>
+                                        </>
+                                    )
+                                }
                                 return (
-                                    <div className="flex flex-col items-end">
-                                        <div className="text-yellow-500 font-semibold py-2 rounded cursor-default">👑 You are the creator of this activity</div>
-                                        {!isConfirmed && (
-                                            <>
-                                                <button
-                                                    onClick={() => setConfirmModalState({
-                                                        action: "confirm",
-                                                        title: "Confirm this activity?",
-                                                        description: "This will lock the participant list. Are you sure you want to confirm?",
-                                                        confirmText: "Yes, confirm",
-                                                        onConfirm: async () => {
-                                                            await confirmActivity();
-                                                            setConfirmModalState(null);
-                                                        }
-                                                    })}
-                                                    className="ml-4 mt-4 rounded bg-green-600 text-white font-semibold px-4 py-2 cursor-pointer hover:not-disabled:bg-green-700 disabled:opacity-60"
-                                                    disabled={!canConfirm}
-                                                >
-                                                    ✅ Confirm Activity
-                                                </button>
-                                                { !canConfirm && (
-                                                    <div className="mt-2 text-sm text-end text-gray-400 space-y-1">
-                                                        {!isFull && <p>Activity must be <span className="text-white font-medium">full</span> before it can be confirmed.</p>}
-                                                        {!isWithinOneWeek && <p>Activity can only be confirmed <span className="text-white font-medium">within one week</span> of its start date.</p>}
-                                                    </div>
-                                                ) }
-                                            </>
-                                        )}
-                                    </div>
-                                )
-                            }
-                            if (activity.participants.some(participant => participant.id === user.id)) {
-                                return (
-                                    <div>
-                                        <div className="text-green-500 font-semibold px-4 py-2 rounded cursor-default">✅ You already participate in this activity</div>
-                                        <div
+                                    <>
+                                        <button
                                             onClick={() => setConfirmModalState({
-                                                action: "leave",
-                                                title: "Leave this activity?",
-                                                description: "Are you sure you want to leave this activity?",
-                                                confirmText: "Yes, leave",
+                                                action: "join",
+                                                title: "Join this activity?",
+                                                description: "Are you sure you want to join this activity?",
+                                                confirmText: "Yes, join",
                                                 onConfirm: async () => {
-                                                    await leaveActivity();
+                                                    await joinActivity();
                                                     setConfirmModalState(null);
                                                 }
                                             })}
-                                            className="text-red-500 text-right px-4 cursor-pointer hover:underline">Leave activity</div>
-                                    </div>
-                                )
-                            }
-                            return (
-                                <>
-                                    <button
-                                        onClick={() => setConfirmModalState({
-                                            action: "join",
-                                            title: "Join this activity?",
-                                            description: "Are you sure you want to join this activity?",
-                                            confirmText: "Yes, join",
-                                            onConfirm: async () => {
-                                                await joinActivity();
-                                                setConfirmModalState(null);
-                                            }
-                                        })}
-                                        className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer disabled:opacity-60"
-                                        disabled={isFull}
-                                        data-tooltip-id={isFull ? "join-tooltip" : undefined}
-                                        data-tooltip-content={isFull ? "This activity is full. Try other activities!" : undefined}
-                                    >
-                                        Join Activity
-                                    </button>
-                                    {isFull && (
-                                        <Tooltip className="!bg-[#292929] !text-yellow-400" id="join-tooltip" place="bottom" delayShow={0} />
-                                    )}
-                                </>
-                            );
-                        })()}
+                                            className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer disabled:opacity-60"
+                                            disabled={isFull}
+                                            data-tooltip-id={isFull ? "join-tooltip" : undefined}
+                                            data-tooltip-content={isFull ? "This activity is full. Try other activities!" : undefined}
+                                        >
+                                            Join Activity
+                                        </button>
+                                        {isFull && (
+                                            <Tooltip className="!bg-[#292929] !text-yellow-400" id="join-tooltip" place="bottom" delayShow={0} />
+                                        )}
+                                    </>
+                                );
+                            })()}
+                        </div>
                     </div>
                 </div>
             </div>
