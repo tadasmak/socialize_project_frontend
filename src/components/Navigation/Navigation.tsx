@@ -29,10 +29,10 @@ export default function Navigation() {
                         ))}
                     </Link>
                     <div className="flex items-center">
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center">
                             {user ? (
                                 <>
-                                    <Link to="/activities/new" className="bg-coral hover:bg-coral-darker duration-100 inline-flex items-center text-sm font-medium rounded-md px-4 py-2">
+                                    <Link to="/activities/new" className="bg-coral hover:bg-coral-darker duration-100 inline-flex items-center text-sm font-medium rounded-md px-4 py-2 mr-2">
                                         <img className="h-4 mr-2" src="../src/assets/icons/plus.svg" />
                                         New Activity
                                     </Link>

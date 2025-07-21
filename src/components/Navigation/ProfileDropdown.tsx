@@ -11,7 +11,7 @@ interface Props {
 const ProfileDropdown = ({ user, onLogout }: Props) => {
     return (
         <Menu as="div" className="relative inline-block text-left">
-            <MenuButton className="inline-flex items-center px-4 py-2 text-white rounded cursor-pointer">
+            <MenuButton className="inline-flex items-center p-2 text-white rounded cursor-pointer transition hover:bg-black/30 focus:outline-none">
                 <img 
                     src="../src/assets/icons/profile-icon-placeholder.svg"
                     className="w-8 h-8 rounded-full mr-1"
