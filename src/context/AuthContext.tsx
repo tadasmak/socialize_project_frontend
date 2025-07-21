@@ -10,12 +10,14 @@ type User = {
 
 type AuthContextType = {
     user: User | null;
+    authLoading: boolean;
     login: (token: string) => Promise<void>;
     logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
     user: null,
+    authLoading: true,
     login: async () => {},
     logout: () => {}
 });
@@ -24,11 +26,12 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
+    const [authLoading, setAuthLoading] = useState(true);
     
     useEffect(() => {
         const initialize = async () => {
             const token = localStorage.getItem('authToken');
-            if (!token) return;
+            if (!token) return setAuthLoading(false);
 
             try {
                 const user = await getCurrentUser();
@@ -36,6 +39,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             } catch {
                 localStorage.removeItem('authToken');
                 setUser(null);
+            } finally {
+                setAuthLoading(false);
             }
         };
 
@@ -59,7 +64,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, authLoading, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
