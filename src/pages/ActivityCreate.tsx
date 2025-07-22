@@ -10,6 +10,7 @@ import AgeRangeSlider from '../components/ActivityForm/AgeRangeSlider';
 
 import { apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
+import { set } from 'date-fns';
 
 const ActivityCreate = () => {
   const { user } = useAuth();
@@ -34,6 +35,7 @@ const ActivityCreate = () => {
 
   const handleGenerateDescription = async () => {
     setGeneratingDescription(true);
+
     try {
       const response = await apiFetch('/api/v1/activities/generate_description', {
         method: 'POST',
@@ -52,19 +54,59 @@ const ActivityCreate = () => {
         throw new Error('Failed to generate description');
       }
 
-      const data = await response.json();
-      setForm(prev => ({ ...prev, description: data.description || '' }));
-      toast.success('Description generated!', {
-        position: 'bottom-center',
-        autoClose: 2000,
-        theme: 'dark'
-      });
-    } catch (error) {
-      toast.error('Could not generate description', {
-        position: 'bottom-center',
-        autoClose: 3000
-      })
+      const { request_id } = await response.json();
 
+      if (!request_id) throw new Error('Invalid response: request_id is missing');
+
+      const pollStatus = async (request_id: string, retries = 5, delay = 2000) => {
+        let lastError: unknown = null;
+
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        for (let i = 0; i < retries; i++) {
+          try {
+            const statusResponse = await apiFetch(`/api/v1/activities/description_status/${request_id}`, { method: 'GET' });
+
+            if (!statusResponse.ok) {
+              lastError = new Error(`Polling failed with HTTP ${statusResponse.status}`);
+              continue;
+            }
+
+            const { status, description, message } = await statusResponse.json();
+
+            if (status == 'completed' && description) {
+              setForm(prev => ({ ...prev, description }));
+              toast.success('Description generated!', {
+                position: 'bottom-center',
+                autoClose: 2000,
+                theme: 'dark'
+              })
+              return;
+            }
+
+            if (status === 'pending') continue;
+            if (status === 'error') throw new Error(message || 'Description generation failed');
+
+            lastError = new Error(`Unexpected status: ${status}`);
+          } catch (error) {
+            lastError = error;
+          }
+
+          await new Promise(resolve => setTimeout(resolve, delay));
+        }
+
+        throw lastError || new Error(('Polling timed out'));
+      }
+
+      await pollStatus(request_id);
+      
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+          toast.error(error.message || 'Could not generate description', {
+          position: 'bottom-center',
+          autoClose: 3000
+        })
+      }
       console.log(error);
     } finally {
       setGeneratingDescription(false);
