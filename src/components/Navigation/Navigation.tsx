@@ -41,8 +41,8 @@ export default function Navigation() {
                                 </>
                             ) : (
                                 <>
-                                    <Link to="/participants/login" className="text-sm font-medium text-white hover:underline">Login</Link>
-                                    <Link to="/participants/register" className="bg-coral hover:bg-coral-darker duration-100 text-sm font-medium rounded-md px-4 py-2 text-white">Register</Link>
+                                    <Link to="/participants/login" className="text-sm font-medium text-white px-4 py-2 mr-2 hover:underline">Login</Link>
+                                    <Link to="/participants/register" className="bg-coral hover:bg-coral-darker duration-100 text-white text-sm font-medium rounded-md px-4 py-2">Register</Link>
                                 </>
                             )}
                         </div>
