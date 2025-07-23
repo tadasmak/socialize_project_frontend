@@ -20,7 +20,13 @@ const ActivityFeed: React.FC = () => {
     useEffect(() => {
         const params = {
             page: searchParams.get('page') || '1',
-            limit: PAGE_SIZE.toString()
+            limit: PAGE_SIZE.toString(),
+            q: searchParams.get('q') || ''
+        }
+
+        const searchQuery = searchParams.get('q');
+        if (searchQuery) {
+            params.q = searchQuery;
         }
 
         const fetchActivities = async () => {
