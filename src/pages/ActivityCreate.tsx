@@ -10,7 +10,6 @@ import AgeRangeSlider from '../components/ActivityForm/AgeRangeSlider';
 
 import { apiFetch } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
-import { set } from 'date-fns';
 
 const ActivityCreate = () => {
   const { user } = useAuth();
