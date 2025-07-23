@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { Search } from 'lucide-react';
+
 import { useAuth } from '../../context/AuthContext';
 
 import ProfileDropdown from './ProfileDropdown';
@@ -32,9 +34,9 @@ export default function Navigation() {
                         <div className="flex items-center">
                             {user ? (
                                 <>
-                                    <Link to="/activities/new" className="bg-coral hover:bg-coral-darker duration-100 inline-flex items-center text-sm font-medium rounded-md px-4 py-2 mr-2">
-                                        <img className="h-4 mr-2" src="../src/assets/icons/plus.svg" />
-                                        New Activity
+                                    <Link to="/activities/new" className="bg-coral hover:bg-coral-darker duration-100 inline-flex items-center text-sm font-medium rounded-md p-2.5 mr-2 md:px-4">
+                                        <img className="h-4 md:mr-2" src="../src/assets/icons/plus.svg" />
+                                        <span className="hidden md:inline">New Activity</span>
                                     </Link>
 
                                     <ProfileDropdown user={user} onLogout={() => setShowConfirmModal(true)} />
