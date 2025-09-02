@@ -1,6 +1,6 @@
-import { apiFetch } from '../utils/api'
+import { apiFetch } from '../utils/api';
 
-const API_URL = 'http://localhost:3000/api/v1';
+import { API_URL } from '../config/api';
 
 export const apiRegister = async (email: string, password: string) => {
     const response = await apiFetch(`${API_URL}/users`, {
