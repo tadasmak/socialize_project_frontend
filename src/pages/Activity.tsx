@@ -11,6 +11,9 @@ import { useAuth } from '../context/AuthContext';
 import { ActivityDetailType } from '../types/activityTypes';
 import ConfirmModal from '../components/ConfirmModal'
 
+import cyclingImage from '../assets/activities/cycling.jpg';
+import profilePlaceholderIcon from '../assets/icons/profile-icon-placeholder.svg';
+
 const Activity = () => {
     const params = useParams();
     const id = params.id;
@@ -174,7 +177,7 @@ const Activity = () => {
                 <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl py-6 px-8 shadow-lg">
                     {isFull && <p className="mb-4">⚠️ <small className="text-yellow-500">This activity is full. Try other activities!</small></p>}
 
-                    <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-80 object-cover rounded-lg mb-6" />
+                    <img src={cyclingImage} alt="Activity Icon" className="w-80 object-cover rounded-lg mb-6" />
 
                     <h1 className="text-3xl font-bold">{activity.title}</h1>
                         
@@ -197,7 +200,7 @@ const Activity = () => {
                         <div className="flex flex-wrap gap-4">
                             {activity.participants.map((user) => (
                             <Link to={`/participants/${user.username}`} key={user.username} className="flex items-center space-x-2 hover:underline">
-                                <img src='../src/assets/icons/profile-icon-placeholder.svg' className="w-8 h-8 rounded-full" />
+                                <img src={profilePlaceholderIcon} className="w-8 h-8 rounded-full" />
                                 <span className="text-gray-200">@{user.username}</span>
                             </Link>
                             ))}

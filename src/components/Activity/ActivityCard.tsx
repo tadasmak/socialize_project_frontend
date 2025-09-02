@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import cyclingImage from '../../assets/activities/cycling.jpg';
+
 type ActivityCardProps = {
     id: number;
     title: string;
@@ -27,7 +29,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
     return (
         <Link to={`/activities/${id}`} key={id} className="bg-[#292929] ring-1 ring-black ring-opacity-5 shadow-lg flex rounded-lg p-3">
             <div className="flex items-center min-w-45 w-45 aspect-square mr-4">
-                <img src="../src/assets/activities/cycling.jpg" alt="Activity Icon" className="w-full object-cover rounded-lg" />
+                <img src={cyclingImage} alt="Activity Icon" className="w-full object-cover rounded-lg" />
             </div>
             <div className="px-2 flex flex-col justify-center flex-grow overflow-hidden">
                 <h2 className="font-semibold truncate text-2xl mb-1">{title}</h2>

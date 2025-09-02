@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 
 import { apiFetch } from '../utils/api';
 
+import profilePlaceholderIcon from '../assets/icons/profile-icon-placeholder.svg';
+
 interface ParticipantType {
     username: string;
     personality: number;
@@ -57,7 +59,7 @@ const Participant = ()  => {
 
             <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl p-6 shadow-lg">
                 <div className="flex items-center space-x-4 mb-6">
-                    <img src="../src/assets/icons/profile-icon-placeholder.svg" className="w-16 h-16 rounded-full" />
+                    <img src={profilePlaceholderIcon} className="w-16 h-16 rounded-full" />
                     <div>
                         <h1 className="text-3xl font-semibold">@{user.username}</h1>
                         <p className="text-gray-400">🎂 Age: { user.age ? <span className="text-gray-300 font-semibold">{user.age}</span> : <span>not given</span>}</p>

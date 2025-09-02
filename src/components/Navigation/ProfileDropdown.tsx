@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { ChevronDown, User, Settings, LogOut } from 'lucide-react';
 
+import profilePlaceholderIcon from '../../assets/icons/profile-icon-placeholder.svg';
+
 interface Props {
     user: { username: string };
     onLogout: () => void;
@@ -12,7 +14,7 @@ const ProfileDropdown = ({ user, onLogout }: Props) => {
     return (
         <Menu as="div" className="relative inline-block text-left">
             <MenuButton className="inline-flex items-center p-2 text-white rounded cursor-pointer transition hover:bg-black/30 focus:outline-none">
-                <img src="../src/assets/icons/profile-icon-placeholder.svg" className="w-8 h-8 rounded-full mr-1" alt="Profile"/>
+                <img src={profilePlaceholderIcon} className="w-8 h-8 rounded-full mr-1" alt="Profile"/>
                 <ChevronDown size={18} />
             </MenuButton>
             <MenuItems className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-[#292929] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">

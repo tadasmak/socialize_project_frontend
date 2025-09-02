@@ -8,6 +8,9 @@ import { useAuth } from '../../context/AuthContext';
 import ProfileDropdown from './ProfileDropdown';
 import ConfirmModal from '../ConfirmModal';
 
+import logoImage from '../../assets/branding/logo.png';
+import plusIcon from '../../assets/icons/plus.svg';
+
 const navigationItems = [
     { name: 'Activities', href: '/', current: true },
 ]
@@ -34,7 +37,7 @@ export default function Navigation() {
                     <div className="flex justify-between items-center h-16">
                         <Link to="/activities" className="flex items-center h-full inset-y-0 left-0">
                             <div className="flex flex-1 justify-center items-stretch mr-6">
-                                <img alt="Social Eyes" src="../src/assets/branding/logo.png" className="h-10 w-auto" />
+                                <img alt="Social Eyes" src={logoImage} className="h-10 w-auto" />
                                 <div className="text-xl/10 font-bold ml-2">Social Eyes</div>
                             </div>
                             {navigationItems.map((item) => (
@@ -68,7 +71,7 @@ export default function Navigation() {
                                 {user ? (
                                     <>
                                         <Link to="/activities/new" className="bg-coral hover:bg-coral-darker duration-100 inline-flex items-center text-sm font-medium rounded-md p-2.5 mr-2 md:px-4">
-                                            <img className="h-4 md:mr-2" src="../src/assets/icons/plus.svg" />
+                                            <img className="h-4 md:mr-2" src={plusIcon} />
                                             <span className="hidden md:inline">New Activity</span>
                                         </Link>
                                         <ProfileDropdown user={user} onLogout={() => setShowConfirmModal(true)} />
