@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import Slider from 'rc-slider';
 
-import { apiFetch } from '../utils/api';
+import { apiFetch } from '../utils/apiClient';
 import { useAuth } from '../context/AuthContext';
 
 interface EditProfileType {
@@ -34,7 +34,7 @@ const EditProfile = ()  => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        apiFetch(`/api/v1/current_user`)
+        apiFetch(`/current_user`)
         .then(response => response.json())
         .then(data => {
             setProfile(data);
@@ -56,7 +56,7 @@ const EditProfile = ()  => {
         }
         setLoading(true);
         try {
-            const response = await apiFetch('/api/v1/current_user', {
+            const response = await apiFetch('/current_user', {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ birth_date: profile.birth_date, personality: profile.personality })

@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { apiFetch } from '../utils/api';
+import { apiFetch } from '../utils/apiClient';
 
 import profilePlaceholderIcon from '../assets/icons/profile-icon-placeholder.svg';
 
@@ -38,7 +38,7 @@ const Participant = ()  => {
             return;
         }
 
-        apiFetch(`/api/v1/users/${username}`)
+        apiFetch(`/users/${username}`)
         .then(response => response.json())
         .then(data => {
             setUser(data);

@@ -7,7 +7,7 @@ import activityCache from '../utils/activityCache';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { apiFetch } from '../utils/api';
+import { apiFetch } from '../utils/apiClient';
 import { useAuth } from '../context/AuthContext';
 import { ActivityEditType } from '../types/activityTypes';
 
@@ -35,7 +35,7 @@ const ActivityEdit = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        apiFetch(`/api/v1/activities/${id}`)
+        apiFetch(`/activities/${id}`)
         .then(response => response.json())
         .then(data => {
             setActivity({
@@ -68,7 +68,7 @@ const ActivityEdit = () => {
 
         setGeneratingDescription(true);
         try {
-            const response = await apiFetch('/api/v1/activities/generate_description', {
+            const response = await apiFetch('/activities/generate_description', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -114,7 +114,7 @@ const ActivityEdit = () => {
         }
         setLoadingUpdate(true);
         try {
-            const response = await apiFetch(`/api/v1/activities/${id}`, {
+            const response = await apiFetch(`/activities/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(activity),

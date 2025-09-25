@@ -6,7 +6,7 @@ import activityCache from '../utils/activityCache';
 import { toast } from 'react-toastify';
 import { Tooltip } from 'react-tooltip';
 
-import { apiFetch } from '../utils/api';
+import { apiFetch } from '../utils/apiClient';
 import { useAuth } from '../context/AuthContext';
 import { ActivityDetailType } from '../types/activityTypes';
 import ConfirmModal from '../components/ConfirmModal'
@@ -35,7 +35,7 @@ const Activity = () => {
     const fetchActivity = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await apiFetch(`/api/v1/activities/${id}`);
+            const response = await apiFetch(`/activities/${id}`);
             if (!response.ok) throw new Error('Failed to fetch activity');
 
             const data = await response.json();
@@ -62,7 +62,7 @@ const Activity = () => {
         if (!user) return alert('You must be logged in to join an activity');
 
         try {
-            const response = await apiFetch(`/api/v1/activities/${id}/join`, {
+            const response = await apiFetch(`/activities/${id}/join`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ const Activity = () => {
 
     const leaveActivity = async () => {
         try {
-            const response = await apiFetch(`/api/v1/activities/${id}/leave`, {
+            const response = await apiFetch(`/activities/${id}/leave`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -126,7 +126,7 @@ const Activity = () => {
 
     const confirmActivity = async () => {
         try {
-            const response = await apiFetch(`/api/v1/activities/${id}/confirm`, {
+            const response = await apiFetch(`/activities/${id}/confirm`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from 'react-router-dom';
 
-import { apiFetch } from '../utils/api';
+import { apiFetch } from '../utils/apiClient';
 
 import { ActivityCardType } from '../types/activityTypes';
 
@@ -34,7 +34,7 @@ const ActivityFeed: React.FC = () => {
 
             try {
                 const query = new URLSearchParams(params).toString();
-                const response = await apiFetch(`/api/v1/activities?${query}`);
+                const response = await apiFetch(`/activities?${query}`);
 
                 if (!response.ok) throw new Error('Failed to fetch activities');
 

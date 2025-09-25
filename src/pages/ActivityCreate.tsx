@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import MaxParticipantsSlider from '../components/ActivityForm/MaxParticipantsSlider';
 import AgeRangeSlider from '../components/ActivityForm/AgeRangeSlider';
 
-import { apiFetch } from '../utils/api';
+import { apiFetch } from '../utils/apiClient';
 import { useAuth } from '../context/AuthContext';
 
 const ActivityCreate = () => {
@@ -36,7 +36,7 @@ const ActivityCreate = () => {
     setGeneratingDescription(true);
 
     try {
-      const response = await apiFetch('/api/v1/activities/generate_description', {
+      const response = await apiFetch('/activities/generate_description', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -64,7 +64,7 @@ const ActivityCreate = () => {
 
         for (let i = 0; i < retries; i++) {
           try {
-            const statusResponse = await apiFetch(`/api/v1/activities/description_status/${request_id}`, { method: 'GET' });
+            const statusResponse = await apiFetch(`/activities/description_status/${request_id}`, { method: 'GET' });
 
             if (!statusResponse.ok) {
               lastError = new Error(`Polling failed with HTTP ${statusResponse.status}`);
@@ -145,7 +145,7 @@ const ActivityCreate = () => {
         maximum_age: ageRange[1]
       }
 
-      const response = await apiFetch('/api/v1/activities', {
+      const response = await apiFetch('/activities', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

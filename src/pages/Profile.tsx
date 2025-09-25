@@ -1,7 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { apiFetch } from '../utils/api';
+import { apiFetch } from '../utils/apiClient';
 
 import { ActivityCardType } from '../types/activityTypes';
 
@@ -34,7 +34,7 @@ const Profile = ()  => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        apiFetch(`/api/v1/current_user`)
+        apiFetch(`/current_user`)
         .then(response => response.json())
         .then(data => {
             setUser(data);
