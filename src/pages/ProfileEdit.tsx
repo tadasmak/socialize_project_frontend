@@ -59,7 +59,12 @@ const EditProfile = ()  => {
             const response = await apiFetch('/current_user', {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ birth_date: profile.birth_date, personality: profile.personality })
+                body: JSON.stringify({
+                  user: { 
+                    birth_date: profile.birth_date,
+                    personality: profile.personality 
+                  }
+            })
             });
 
             if (!response.ok) throw new Error('Failed to update profile');

@@ -40,12 +40,14 @@ const ActivityCreate = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          title: form.title,
-          location: form.location,
-          start_time: form.start_time,
-          max_participants: form.max_participants,
-          minimum_age: ageRange[0],
-          maximum_age: ageRange[1]
+          activity: {
+            title: form.title,
+            location: form.location,
+            start_time: form.start_time,
+            max_participants: form.max_participants,
+            minimum_age: ageRange[0],
+            maximum_age: ageRange[1]
+          }
         })
       });
 
@@ -139,16 +141,16 @@ const ActivityCreate = () => {
     setLoading(true);
 
     try {
-      const payload = {
-        ...form,
-        minimum_age: ageRange[0],
-        maximum_age: ageRange[1]
-      }
-
       const response = await apiFetch('/activities', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          activity: {
+            ...form,
+            minimum_age: ageRange[0],
+            maximum_age: ageRange[1]
+          }
+        }),
       });
 
       if (!response.ok) {
