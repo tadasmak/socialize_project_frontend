@@ -14,6 +14,15 @@ export default defineConfig({
         target: 'http://localhost:3000',
         changeOrigin: true
       } 
-    }
+    },
+    host: '0.0.0.0',
+    port: 5173,
+    watch: {
+      usePolling: true,  // Enable polling for Docker
+      interval: 100,     // Check for changes every 100ms
+    },
+    hmr: {
+      host: 'localhost',
+    },
   }
 })
