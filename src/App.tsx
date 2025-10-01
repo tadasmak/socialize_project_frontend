@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
-import Home from './pages/Home';
+// import Home from './pages/Home';
 import ActivityFeed from './pages/ActivityFeed';
 import Activity from './pages/Activity';
 import ActivityCreation from './pages/ActivityCreate';
@@ -26,9 +26,9 @@ const App = () => {
       <AuthProvider>
         <Navigation />
 
-        <main className="mx-auto mt-12 max-w-7xl px-2 sm:px-6 lg:px-8 pb-12">
+        <main className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8 pb-12">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<ActivityFeed />} />
 
             <Route path="/activities" element={<ActivityFeed />} />
             <Route path="/activities/:id" element={<Activity />} />
@@ -48,12 +48,12 @@ const App = () => {
             <Route path="/participants/me" element={
               <ProtectedRoute>
                 <Profile />
-              </ProtectedRoute> 
+              </ProtectedRoute>
             } />
             <Route path="/participants/me/edit" element={
               <ProtectedRoute>
                 <EditProfile />
-              </ProtectedRoute> 
+              </ProtectedRoute>
             } />
             <Route path="/participants/:username" element={<Participant />} />
           </Routes>
@@ -62,7 +62,7 @@ const App = () => {
         <ToastContainer />
       </AuthProvider>
     </Router>
-    
+
   );
 };
 
