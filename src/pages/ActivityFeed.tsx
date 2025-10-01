@@ -61,8 +61,8 @@ const ActivityFeed: React.FC = () => {
 
     return (
         <>
-            <h1 className="text-5xl font-bold">Activity Feed</h1>
-            <p className="text-xl mt-6">This is the activity page. You can find activities here that you can choose to participate in.</p>
+            <h1 className="text-4xl md:text-5xl font-bold">Activity Feed</h1>
+            <p className="text-lg md:text-xl mt-6">This is the activity page. You can find activities here that you can choose to participate in.</p>
 
             <div className="mt-6 grid justify-center grid-cols-1 lg:grid-cols-2 gap-4">
                 {activities.map((activity) => (
