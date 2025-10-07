@@ -1,12 +1,12 @@
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-interface AgeRangeSliderProps {
+interface Props {
     value: [number, number];
     onChange: (values: [number, number]) => void;
 }
 
-const AgeRangeSlider: React.FC<AgeRangeSliderProps> = ({ value, onChange }) => {
+const AgeRangeSlider: React.FC<Props> = ({ value, onChange }) => {
     const handleChange = (input: number | number[]) => {
         if (Array.isArray(input) && input.length === 2) {
             onChange([input[0], input[1]]);
@@ -26,8 +26,8 @@ const AgeRangeSlider: React.FC<AgeRangeSliderProps> = ({ value, onChange }) => {
                 onChange={handleChange}
                 trackStyle={[{ backgroundColor: '#f87171' }]}
                 handleStyle={[
-                { borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1, zIndex: 0 },
-                { borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1, zIndex: 0 }
+                    { borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1, zIndex: 0 },
+                    { borderColor: '#f87171', backgroundColor: '#f87171', opacity: 1, zIndex: 0 }
                 ]}
             />
         </div>

@@ -31,7 +31,7 @@ export interface ActivityCardType {
     participants_count: number
 }
 
-export interface ActivityEditType {
+export interface ActivityFormType {
     title: string,
     description: string,
     location: string,

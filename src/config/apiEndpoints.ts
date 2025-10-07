@@ -7,7 +7,7 @@ const getApiUrl = (): string => {
 
   // Fallback: determine based on current environment
   const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-  
+
   if (isLocal) {
     return 'http://localhost:3000/api/v1';
   } else {
@@ -17,6 +17,3 @@ const getApiUrl = (): string => {
 };
 
 export const API_URL = getApiUrl();
-
-// Optional: Add logging for debugging
-console.log('API URL configured as:', API_URL);
