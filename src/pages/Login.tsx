@@ -38,16 +38,16 @@ export const Login = () => {
     };
 
     return (
-        <div className="lg:w-1/2 m-auto">
+        <div className="lg:w-1/2 mx-auto">
             <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 flex justify-center rounded-xl p-6 shadow-lg">
                 <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6 p-8 rounded-xl">
                     <h1 className="text-2xl font-semibold text-white text-center">Sign in</h1>
 
-                    {error && ( <p className="text-red-400 text-sm text-center bg-red-900/20 p-2 rounded"> {error}</p> )}
+                    {error && (<p className="text-red-400 text-sm text-center bg-red-900/20 p-2 rounded"> {error}</p>)}
 
-                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral" required/>
+                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-bg-coral" required />
 
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-[#b05c56]" required/>
+                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full px-4 py-3 rounded bg-[#1d1d1d] text-white placeholder-gray-400 border border-[#444] focus:outline-none focus:ring-2 focus:ring-[#b05c56]" required />
 
                     <button type="submit" className="w-full py-3 bg-coral hover:bg-coral-darker text-white rounded font-semibold transition-colors duration-100 cursor-pointer">Log in</button>
 
