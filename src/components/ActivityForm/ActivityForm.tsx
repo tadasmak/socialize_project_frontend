@@ -15,7 +15,7 @@ interface Props {
         key: K,
         value: ActivityFormType[K]
     ) => void;
-    onGenerateDescription: () => void,
+    generateDescription: (activity: ActivityFormType) => Promise<void>;
     onSubmit: (e: React.FormEvent) => void;
     action?: 'create' | 'edit';
 }
@@ -25,7 +25,7 @@ const ActivityForm: React.FC<Props> = ({
     loadingSubmit,
     generatingDescription,
     onChange,
-    onGenerateDescription,
+    generateDescription,
     onSubmit,
     action = 'edit'
 }) => {
@@ -58,7 +58,7 @@ const ActivityForm: React.FC<Props> = ({
                 />
                 <button
                     type="button"
-                    onClick={onGenerateDescription}
+                    onClick={() => generateDescription(activity)}
                     disabled={generatingDescription || !activity.title || !activity.location || !!activity.description}
                     className="py-2 ml-auto rounded font-medium text-sm text-coral-light hover:underline cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     title="Generate description"

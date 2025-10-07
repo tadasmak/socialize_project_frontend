@@ -26,7 +26,7 @@ const ActivityEdit = () => {
         loadingSubmit,
         generatingDescription,
         handleChange,
-        handleGenerateDescription,
+        generateDescription,
         handleSubmit,
     } = useActivityEdit(defaultActivity, user);
 
@@ -48,7 +48,7 @@ const ActivityEdit = () => {
                     loadingSubmit={loadingSubmit}
                     generatingDescription={generatingDescription}
                     onChange={handleChange}
-                    onGenerateDescription={handleGenerateDescription}
+                    generateDescription={generateDescription}
                     onSubmit={handleSubmit}
                     action='edit'
                 />

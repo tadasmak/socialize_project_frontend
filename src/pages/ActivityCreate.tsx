@@ -11,7 +11,7 @@ const ActivityCreate = () => {
     loading,
     generatingDescription,
     handleChange,
-    handleGenerateDescription,
+    generateDescription,
     handleSubmit,
   } = useActivityCreate(user);
 
@@ -24,7 +24,7 @@ const ActivityCreate = () => {
         loadingSubmit={loading}
         generatingDescription={generatingDescription}
         onChange={handleChange}
-        onGenerateDescription={handleGenerateDescription}
+        generateDescription={generateDescription}
         onSubmit={handleSubmit}
         action='create'
       />
