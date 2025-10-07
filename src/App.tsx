@@ -24,40 +24,42 @@ const App = () => {
   return (
     <Router>
       <AuthProvider>
-        <Navigation />
+        <div className="flex flex-col h-full">
+          <Navigation />
 
-        <main className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8 pb-12">
-          <Routes>
-            <Route path="/" element={<ActivityFeed />} />
+          <main className="flex flex-col w-full h-full mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8 pb-12">
+            <Routes>
+              <Route path="/" element={<ActivityFeed />} />
 
-            <Route path="/activities" element={<ActivityFeed />} />
-            <Route path="/activities/:id" element={<Activity />} />
-            <Route path="/activities/new" element={
-              <ProtectedRoute>
-                <ActivityCreation />
-              </ProtectedRoute>
-            } />
-            <Route path="/activities/:id/edit" element={
-              <ProtectedRoute>
-                <ActivityEdit />
-              </ProtectedRoute>
-            } />
+              <Route path="/activities" element={<ActivityFeed />} />
+              <Route path="/activities/:id" element={<Activity />} />
+              <Route path="/activities/new" element={
+                <ProtectedRoute>
+                  <ActivityCreation />
+                </ProtectedRoute>
+              } />
+              <Route path="/activities/:id/edit" element={
+                <ProtectedRoute>
+                  <ActivityEdit />
+                </ProtectedRoute>
+              } />
 
-            <Route path="/participants/register" element={<Register />} />
-            <Route path="/participants/login" element={<Login />} />
-            <Route path="/participants/me" element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            } />
-            <Route path="/participants/me/edit" element={
-              <ProtectedRoute>
-                <EditProfile />
-              </ProtectedRoute>
-            } />
-            <Route path="/participants/:username" element={<Participant />} />
-          </Routes>
-        </main>
+              <Route path="/participants/register" element={<Register />} />
+              <Route path="/participants/login" element={<Login />} />
+              <Route path="/participants/me" element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              } />
+              <Route path="/participants/me/edit" element={
+                <ProtectedRoute>
+                  <EditProfile />
+                </ProtectedRoute>
+              } />
+              <Route path="/participants/:username" element={<Participant />} />
+            </Routes>
+          </main>
+        </div>
 
         <ToastContainer />
       </AuthProvider>
