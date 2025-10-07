@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { MapPinIcon, UsersRoundIcon, CakeIcon, Calendar1Icon } from 'lucide-react';
+
 import cyclingImage from '../../assets/activities/cycling.jpg';
 
 type ActivityCardProps = {
@@ -34,26 +36,26 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
             <div className="px-2 flex flex-col justify-center flex-grow overflow-hidden">
                 <h2 className="font-semibold truncate text-2xl mb-1">{title}</h2>
                 <p className="truncate text-stone-400 mb-2">{description}</p>
-                <p className="truncate">
-                    <span className="text-coral-light hidden md:inline">Location: </span>
-                    <span className="md:hidden">📍</span>
+                <div className="flex items-center gap-1 truncate">
+                    <span className="text-coral-light hidden sm:inline">Location:</span>
+                    <MapPinIcon className="sm:hidden inline-block text-coral-light" height={18} />
                     {location}
-                </p>
-                <p>
-                    <span className="text-coral-light hidden md:inline">Participants: </span>
-                    <span className="md:hidden">👥</span>
+                </div>
+                <div className="flex items-center gap-1 truncate">
+                    <span className="text-coral-light hidden sm:inline">Participants:</span>
+                    <UsersRoundIcon className="sm:hidden inline-block text-coral-light" height={18} />
                     {participants_count}/{max_participants}
-                </p>
-                <p>
-                    <span className="text-coral-light hidden md:inline">Age Range: </span>
-                    <span className="md:hidden">🎂</span>
+                </div>
+                <div className="flex items-center gap-1 truncate">
+                    <span className="text-coral-light hidden sm:inline">Age Range:</span>
+                    <CakeIcon className="sm:hidden inline-block text-coral-light" height={18} />
                     {minimum_age} - {maximum_age}
-                </p>
-                <p className="truncate">
-                    <span className="text-coral-light hidden md:inline">Start time: </span>
-                    <span className="md:hidden">📅</span>
+                </div>
+                <div className="flex items-center gap-1 truncate">
+                    <span className="text-coral-light hidden sm:inline">Start time:</span>
+                    <Calendar1Icon className="sm:hidden inline-block text-coral-light" height={18} />
                     {new Date(start_time).toLocaleString()}
-                </p>
+                </div>
             </div>
         </Link>
     )
