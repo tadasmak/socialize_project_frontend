@@ -68,7 +68,7 @@ const ActivityFeed: React.FC = () => {
                 </>
             )}
 
-            <div className="mt-6 grid justify-center grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="my-6 grid justify-center grid-cols-1 lg:grid-cols-2 gap-4">
                 {activities.map((activity) => (
                     <ActivityCard key={activity.id} {...activity} />
                 ))}
