@@ -12,6 +12,7 @@ const PAGE_SIZE = 10;
 const ActivityFeed: React.FC = () => {
     const [activities, setActivities] = useState<ActivityCardType[]>([]);
     const [loading, setLoading] = useState(true);
+    const [hasActivitiesRemaining, setHasActivitiesRemaining] = useState(true);
 
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -39,7 +40,8 @@ const ActivityFeed: React.FC = () => {
                 if (!response.ok) throw new Error('Failed to fetch activities');
 
                 const data = await response.json();
-                setActivities(data);
+                setActivities(data.activities);
+                setHasActivitiesRemaining(data.activities_remain);
             } catch (error) {
                 console.error('Error fetching activities:', error);
             } finally {
@@ -77,7 +79,7 @@ const ActivityFeed: React.FC = () => {
             <div className="flex justify-center mt-auto mb-8 md:mb-4 gap-2">
                 <button onClick={() => goToPage(page - 1)} disabled={page <= 1} className="px-4 py-2 w-24 rounded bg-coral hover:bg-coral-darker text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
                 <span className="px-4 py-2">{page}</span>
-                <button onClick={() => goToPage(page + 1)} className="px-4 py-2 w-24 rounded bg-coral hover:bg-coral-darker text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+                <button onClick={() => goToPage(page + 1)} disabled={!hasActivitiesRemaining} className="px-4 py-2 w-24 rounded bg-coral hover:bg-coral-darker text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
             </div>
         </>
     );
