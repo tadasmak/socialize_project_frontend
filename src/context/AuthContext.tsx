@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { UserType } from '../types/userTypes';
 import { getCurrentUser, apiLogout } from '../api/auth';
+import { resetCable } from '../cable';
 
 type AuthContextType = {
     user: UserType | null;
@@ -50,10 +51,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const logout = () => {
         apiLogout();
+        resetCable();
         setUser(null);
     };
 
     const updateData = async () => {
+        resetCable();
         const user = await getCurrentUser();
         if (user) setUser(user);
         else throw new Error('Failed to fetch user after login.');

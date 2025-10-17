@@ -27,6 +27,8 @@ export const apiLogin = async (email: string, password: string) => {
     throw new Error('No token received');
 }
 
+export const apiLogout = () => localStorage.removeItem('authToken');
+
 export const getToken = () => localStorage.getItem('authToken');
 
 export const getCurrentUser = async () => {
@@ -35,7 +37,7 @@ export const getCurrentUser = async () => {
     if (!token) throw new Error('Not authenticated');
 
     const response = await apiFetch(`/current_user`, {
-        headers: { 
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
@@ -46,5 +48,3 @@ export const getCurrentUser = async () => {
     const data = await response.json();
     return data;
 }
-
-export const apiLogout = () => localStorage.removeItem('authToken');
