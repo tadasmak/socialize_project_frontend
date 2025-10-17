@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
+    "@rails/actioncable": "^8.0.300",
     "@tailwindcss/vite": "^4.1.8",
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
