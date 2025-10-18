@@ -186,13 +186,15 @@ const Activity = () => {
                             <BookTextIcon className="mr-1" height={20} />
                             Details
                         </button>
-                        <button
-                            className={`flex items-center px-4 py-2 cursor-pointer ${activeTab === 'chat' ? 'text-white font-medium border-b-2 border-coral' : 'text-gray-400 hover:text-gray-200'}`}
-                            onClick={() => setActiveTab('chat')}
-                        >
-                            <MessageCircleMoreIcon className="mr-1" height={20} />
-                            Chat
-                        </button>
+                        {user && isUserParticipating && (
+                            <button
+                                className={`flex items-center px-4 py-2 cursor-pointer ${activeTab === 'chat' ? 'text-white font-medium border-b-2 border-coral' : 'text-gray-400 hover:text-gray-200'}`}
+                                onClick={() => setActiveTab('chat')}
+                            >
+                                <MessageCircleMoreIcon className="mr-1" height={20} />
+                                Chat
+                            </button>
+                        )}
                     </div>
                     {activeTab === 'details' && (
                         <div>
@@ -335,7 +337,7 @@ const Activity = () => {
                             </div>
                         </div>
                     )}
-                    {activeTab === 'chat' && isUserParticipating && <ActivityChat activityId={activity.id} />}
+                    {activeTab === 'chat' && user && isUserParticipating && <ActivityChat activityId={activity.id} />}
                 </div>
             </div>
 
