@@ -27,7 +27,7 @@ const personalityDescriptions = [
     "Very Introverted"
 ]
 
-const Profile = ()  => {
+const Profile = () => {
     const [user, setUser] = useState<ProfileType | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -35,12 +35,12 @@ const Profile = ()  => {
 
     useEffect(() => {
         apiFetch(`/current_user`)
-        .then(response => response.json())
-        .then(data => {
-            setUser(data);
-        })
-        .catch(error => console.error('Error fetching user:', error))
-        .finally(() => setLoading(false));
+            .then(response => response.json())
+            .then(data => {
+                setUser(data);
+            })
+            .catch(error => console.error('Error fetching user:', error))
+            .finally(() => setLoading(false));
     }, [])
 
     if (loading) return <p>Loading...</p>;
@@ -49,8 +49,8 @@ const Profile = ()  => {
     const totalParticipatingActivities = user.created_activities.length + user.joined_activities.length;
 
     return (
-        <div className="max-w-2xl mx-auto p-6 text-white">
-            
+        // TODO: merge Profile and Participant into one component
+        <div className="max-w-xl w-full mx-auto p-6 text-white">
             <div className="flex justify-between mb-4">
                 <a className="text-sm text-coral-light cursor-pointer hover:underline" onClick={() => navigate(-1)}>← Back to Activity</a>
                 <Link to="/participants/me/edit" className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>
@@ -61,14 +61,14 @@ const Profile = ()  => {
                     <img src={profilePlaceholderIcon} className="w-16 h-16 rounded-full" />
                     <div>
                         <h1 className="text-3xl font-semibold">@{user.username}</h1>
-                        <p className="text-gray-400">🎂 Age: { user.age ? <span className="text-gray-300 font-semibold">{user.age}</span> : <span>not given</span>}</p>
+                        <p className="text-gray-400">🎂 Age: {user.age ? <span className="text-gray-300 font-semibold">{user.age}</span> : <span>not given</span>}</p>
                     </div>
                 </div>
 
                 <div className="mt-6">
                     <h4 className="text-md font-medium mb-2">Personality: <span className="text-gray-400 font-normal">({personalityDescriptions[user.personality - 1] || "unknown"})</span></h4>
                     <div className="relative h-4 rounded-full bg-coral">
-                        { user.personality && <div className="absolute top-1/2 w-4 h-4 rounded-full bg-white border-2 border-coral -translate-y-1/2" style={{ left: `${((user.personality - 1) / 6) * 100}%` }}></div>}
+                        {user.personality && <div className="absolute top-1/2 w-4 h-4 rounded-full bg-white border-2 border-coral -translate-y-1/2" style={{ left: `${((user.personality - 1) / 6) * 100}%` }}></div>}
                     </div>
                     <div className="mt-2 flex justify-between text-sm text-gray-400">
                         <span>Very Extroverted</span>
@@ -77,7 +77,7 @@ const Profile = ()  => {
                 </div>
             </div>
 
-            { user.created_activities.length > 0 && (
+            {user.created_activities.length > 0 && (
                 <div className="mt-8">
                     <h2 className="text-2xl font-semibold">Created activities</h2>
                     <div className="grid grid-cols-1 gap-2 mt-4">
@@ -88,7 +88,7 @@ const Profile = ()  => {
                 </div>
             )}
 
-            { user.joined_activities.length > 0 && (
+            {user.joined_activities.length > 0 && (
                 <div className="mt-8">
                     <h2 className="text-2xl font-semibold">Joined activities</h2>
                     <div className="grid grid-cols-1 gap-2 mt-4">
@@ -99,7 +99,7 @@ const Profile = ()  => {
                 </div>
             )}
 
-            { totalParticipatingActivities > 0 && <p className="text-center mt-3"><span className="font-bold">{totalParticipatingActivities} / 3</span> participating activities {totalParticipatingActivities == 3 && '(limit reached)'}</p> }
+            {totalParticipatingActivities > 0 && <p className="text-center mt-3"><span className="font-bold">{totalParticipatingActivities} / 3</span> participating activities {totalParticipatingActivities == 3 && '(limit reached)'}</p>}
         </div>
     );
 };
