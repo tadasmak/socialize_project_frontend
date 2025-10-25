@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useActivityChat } from '../../hooks/useActivityChat';
 import { useAuth } from '../../context/AuthContext';
 import MessageBubble from '../MessageBubble';
@@ -14,6 +14,7 @@ export default function ActivityChat({ activityId }: Props) {
         activityId,
         user?.id || 0
     );
+    const scrollRef = useRef<HTMLDivElement | null>(null);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -23,13 +24,17 @@ export default function ActivityChat({ activityId }: Props) {
         setInput('');
     };
 
+    useEffect(() => {
+        if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }, [messages]);
+
     if (authLoading) return <div>Loading chat...</div>;
     if (!user) return <div>You must be logged in to chat.</div>;
     if (!messages) return <div>Send a message to start a conversation.</div>;
 
     return (
         <div className="flex flex-col border rounded-lg p-3">
-            <div className="flex flex-col flex-1 overflow-y-auto space-y-2 mb-3">
+            <div ref={scrollRef} className="flex flex-col flex-1 overflow-y-auto space-y-2 mb-3">
                 {messages && messages.map((message, i) => {
                     const prevMessage = messages[i - 1];
                     const showMeta = !prevMessage || prevMessage.user.id !== message.user.id;
