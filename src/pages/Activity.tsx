@@ -168,6 +168,7 @@ const Activity = () => {
     const isConfirmed = activity.status === "confirmed";
     const canConfirm = isCreator && isFull && isWithinOneWeek && !isConfirmed;
     const isUserParticipating = user && activity.participants.some(participant => participant.id === user.id);
+    const isUserAgeSet = !!user?.age
 
     return (
         <>
@@ -177,7 +178,7 @@ const Activity = () => {
                     {isCreator && (<Link to={`/activities/${id}/edit`} className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>)}
                 </div>
 
-                <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl py-6 px-8 shadow-lg">
+                <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl py-4 px-4 md:py-6 md:px-8 shadow-lg">
                     <div className="flex border-b border-gray-700 mb-4">
                         <button
                             className={`flex items-center px-4 py-2 cursor-pointer ${activeTab === 'details' ? 'text-white font-medium border-b-2 border-coral' : 'text-gray-400'}`}
@@ -321,14 +322,14 @@ const Activity = () => {
                                                         }
                                                     })}
                                                     className="bg-coral text-white font-semibold px-4 py-2 rounded hover:bg-coral-darker cursor-pointer disabled:opacity-60"
-                                                    disabled={isFull}
-                                                    data-tooltip-id={isFull ? "join-tooltip" : undefined}
-                                                    data-tooltip-content={isFull ? "This activity is full. Try other activities!" : undefined}
+                                                    disabled={isFull || !isUserAgeSet}
+                                                    data-tooltip-id={isFull || !isUserAgeSet ? "join-tooltip" : undefined}
+                                                    data-tooltip-content={isFull ? "This activity is full. Try other activities!" : (!isUserAgeSet ? "You have to set your age before joining an activity." : undefined)}
                                                 >
                                                     Join Activity
                                                 </button>
-                                                {isFull && (
-                                                    <Tooltip className="!bg-[#292929] !text-yellow-400" id="join-tooltip" place="bottom" delayShow={0} />
+                                                {(isFull || !isUserAgeSet) && (
+                                                    <Tooltip className="!bg-[#292929] shadow-lg shadow-black/30 !text-yellow-400" id="join-tooltip" place="top" delayShow={0} />
                                                 )}
                                             </>
                                         );
