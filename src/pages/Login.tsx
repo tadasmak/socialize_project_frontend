@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,14 +7,20 @@ import { useAuth } from '../context/AuthContext';
 
 import AuthenticationForm from '../components/AuthenticationForm';
 
-
 export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+
+    const { login: contextLogin, user } = useAuth();
     const navigate = useNavigate();
 
-    const { login: contextLogin } = useAuth();
+    useEffect(() => {
+        if (!user) return;
+
+        if (!user.age) navigate('/participants/me/edit');
+        else navigate('/activities');
+    }, [user, navigate])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -29,14 +35,8 @@ export const Login = () => {
                 theme: 'dark',
                 className: 'bg-gradient text-white',
             });
-
-            navigate('/activities');
         } catch (err: unknown) {
-            if (err instanceof Error) {
-                setError(err.message)
-            } else {
-                setError('An unexpected error occurred. Please try again.');
-            }
+            setError(err instanceof Error ? err.message : 'An unexpected error occurred.');
         }
     };
 
