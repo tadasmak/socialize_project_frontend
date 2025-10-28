@@ -2,33 +2,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { apiFetch } from '../utils/apiClient';
-
-import { ActivityCardType } from '../types/activityTypes';
-
+import { ParticipantProfileType } from '../types/participantTypes';
 import ActivityCard from '../components/Activity/ActivityCard';
-
-import profilePlaceholderIcon from '../assets/icons/profile-icon-placeholder.svg';
-
-interface ProfileType {
-    username: string;
-    personality: number;
-    age: number;
-    joined_activities: ActivityCardType[];
-    created_activities: ActivityCardType[];
-}
-
-const personalityDescriptions = [
-    "Very Extroverted",
-    "Extroverted",
-    "Somewhat Extroverted",
-    "Ambiverted",
-    "Somewhat Introverted",
-    "Introverted",
-    "Very Introverted"
-]
+import ParticipantProfileCard from '../components/ParticipantProfileCard';
 
 const Profile = () => {
-    const [user, setUser] = useState<ProfileType | null>(null);
+    const [profile, setProfile] = useState<ParticipantProfileType | null>(null);
     const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
@@ -37,16 +16,16 @@ const Profile = () => {
         apiFetch(`/current_user`)
             .then(response => response.json())
             .then(data => {
-                setUser(data);
+                setProfile(data);
             })
             .catch(error => console.error('Error fetching user:', error))
             .finally(() => setLoading(false));
     }, [])
 
     if (loading) return <p>Loading...</p>;
-    if (!user) return <p>User not found</p>;
+    if (!profile) return <p>User not found</p>;
 
-    const totalParticipatingActivities = user.created_activities.length + user.joined_activities.length;
+    const totalParticipatingActivities = profile.created_activities.length + profile.joined_activities.length;
 
     return (
         // TODO: merge Profile and Participant into one component
@@ -56,43 +35,24 @@ const Profile = () => {
                 <Link to="/participants/me/edit" className="text-sm text-gray-300 mr-2 cursor-pointer hover:text-white hover:underline">✏️ Edit</Link>
             </div>
 
-            <div className="bg-[#292929] ring-1 ring-black ring-opacity-5 rounded-xl p-6 shadow-lg">
-                <div className="flex items-center space-x-4 mb-6">
-                    <img src={profilePlaceholderIcon} className="w-16 h-16 rounded-full" />
-                    <div>
-                        <h1 className="text-3xl font-semibold">@{user.username}</h1>
-                        <p className="text-gray-400">🎂 Age: {user.age ? <span className="text-gray-300 font-semibold">{user.age}</span> : <span>not given</span>}</p>
-                    </div>
-                </div>
+            <ParticipantProfileCard profile={profile} />
 
-                <div className="mt-6">
-                    <h4 className="text-md font-medium mb-2">Personality: <span className="text-gray-400 font-normal">({personalityDescriptions[user.personality - 1] || "unknown"})</span></h4>
-                    <div className="relative h-4 rounded-full bg-coral">
-                        {user.personality && <div className="absolute top-1/2 w-4 h-4 rounded-full bg-white border-2 border-coral -translate-y-1/2" style={{ left: `${((user.personality - 1) / 6) * 100}%` }}></div>}
-                    </div>
-                    <div className="mt-2 flex justify-between text-sm text-gray-400">
-                        <span>Very Extroverted</span>
-                        <span>Very Introverted</span>
-                    </div>
-                </div>
-            </div>
-
-            {user.created_activities.length > 0 && (
+            {profile.created_activities.length > 0 && (
                 <div className="mt-8">
                     <h2 className="text-2xl font-semibold">Created activities</h2>
                     <div className="grid grid-cols-1 gap-2 mt-4">
-                        {user.created_activities.map((activity) => (
+                        {profile.created_activities.map((activity) => (
                             <ActivityCard key={activity.id} {...activity} />
                         ))}
                     </div>
                 </div>
             )}
 
-            {user.joined_activities.length > 0 && (
+            {profile.joined_activities.length > 0 && (
                 <div className="mt-8">
                     <h2 className="text-2xl font-semibold">Joined activities</h2>
                     <div className="grid grid-cols-1 gap-2 mt-4">
-                        {user.joined_activities.map((activity) => (
+                        {profile.joined_activities.map((activity) => (
                             <ActivityCard key={activity.id} {...activity} />
                         ))}
                     </div>
