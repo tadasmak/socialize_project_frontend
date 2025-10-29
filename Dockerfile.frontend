@@ -6,10 +6,13 @@ FROM node:18-alpine AS development
 WORKDIR /app
 
 # Copy package files
-COPY frontend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
+RUN apk add --no-cache python3 make g++
 RUN npm install
+
+COPY . .
 
 # Expose port 5173 for Vite dev server
 EXPOSE 5173
@@ -24,14 +27,17 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
+# ARG to handle different contexts
+ARG CONTEXT_PATH=.
+
 # Copy package files
-COPY frontend/package.json frontend/package-lock.json ./
+COPY ${CONTEXT_PATH}/package*.json ./
 
 # Use npm ci if package-lock.json exists, otherwise npm install
-RUN npm ci --only=production
+RUN npm ci --omit=dev
 
 # Copy frontend source
-COPY frontend/ ./
+COPY ${CONTEXT_PATH}/ .
 RUN npm run build
 
 # ==============================
