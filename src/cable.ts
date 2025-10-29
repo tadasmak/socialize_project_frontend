@@ -7,7 +7,15 @@ export function getCable(): Cable {
     if (!token) throw new Error('No auth token found.');
     if (consumer) return consumer;
 
-    const url = `ws://localhost:3000/api/v1/cable?token=${token}`
+    const isDevelopment = import.meta.env.DEV;
+
+    let url: string;
+    if (isDevelopment) url = `ws://localhost:3000/api/v1/cable?token=${token}`;
+    else {
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        url = `${protocol}//${window.location.host}/api/v1/cable?token=${token}`;
+    }
+
     consumer = createConsumer(url);
 
     return consumer;
