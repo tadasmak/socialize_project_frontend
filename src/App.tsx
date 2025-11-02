@@ -34,7 +34,7 @@ const MainLayout: React.FC<{ children?: ReactNode }> = ({ children }) => (
 
 const NoNavLayout: React.FC<{ children?: ReactNode }> = ({ children }) => (
   <div className="flex flex-col h-full">
-    <main className="flex flex-col w-full h-full mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8 pb-12">
+    <main className="flex flex-col w-full h-full mx-auto">
       {children ?? <Outlet />}
     </main>
   </div>
