@@ -4,7 +4,7 @@ import coverImage from "../assets/welcome_cover.jpg";
 
 const Welcome = () => {
     return (
-        <div className="w-full p-0">
+        <div className="w-full pb-12">
             <div
                 className="flex justify-center items-center relative h-[80vh] sm:h-[70vh] w-full bg-cover bg-center"
                 style={{ backgroundImage: `url(${coverImage})` }}
@@ -36,12 +36,12 @@ const Welcome = () => {
                 </h2>
                 <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-12">
                     Join activities that fit your lifestyle, personality, and age group.
-                    Everything happens in real life — so you can build genuine connections,
+                    Everything happens in real life - so you can build genuine connections,
                     not just followers.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div className="p-6 border border-gray-400 bg-[#242424] rounded-2xl shadow-sm hover:bg-[#2a2a2a] hover:shadow-md transition-all select-none">
+                    <div className="p-6 border border-gray-400 bg-[#202020] rounded-2xl shadow-sm hover:bg-[#2a2a2a] hover:shadow-md transition-all select-none">
                         <h3 className="text-xl font-semibold text-coral-light mb-3">Create or Join</h3>
                         <p className="text-gray-300">
                             Post your own activity or join one nearby that matches your
@@ -50,7 +50,7 @@ const Welcome = () => {
                         </p>
                     </div>
 
-                    <div className="p-6 border border-gray-400 bg-[#242424] rounded-2xl shadow-sm hover:bg-[#2a2a2a] hover:shadow-md transition-all select-none">
+                    <div className="p-6 border border-gray-400 bg-[#202020] rounded-2xl shadow-sm hover:bg-[#2a2a2a] hover:shadow-md transition-all select-none">
                         <h3 className="text-xl font-semibold text-coral-light mb-3">Age & Personality Match</h3>
                         <p className="text-gray-300">
                             Activities automatically show only to people within your preferred
@@ -59,7 +59,7 @@ const Welcome = () => {
                         </p>
                     </div>
 
-                    <div className="p-6 border border-gray-400 bg-[#242424] rounded-2xl shadow-sm hover:bg-[#2a2a2a] hover:shadow-md transition-all select-none">
+                    <div className="p-6 border border-gray-400 bg-[#202020] rounded-2xl shadow-sm hover:bg-[#2a2a2a] hover:shadow-md transition-all select-none">
                         <h3 className="text-xl font-semibold text-coral-light mb-3">Chat & Confirm</h3>
                         <p className="text-gray-300">
                             Chat with participants before the event. Once an activity is confirmed,
