@@ -39,7 +39,7 @@ export default function Navigation() {
 
     function applySearch(e: React.FormEvent) {
         e.preventDefault();
-        
+
         const query = searchQuery.trim();
 
         if (query) navigate(`/activities?q=${encodeURIComponent(query)}`);
@@ -53,7 +53,7 @@ export default function Navigation() {
                     <div className="flex justify-between w-full h-full">
                         {!showSearch && (
                             <div>
-                                <Link to="/activities" className="flex items-center h-full">
+                                <Link to="/" className="flex items-center h-full">
                                     <div className="flex flex-1 justify-center items-stretch mr-6">
                                         <img alt="Social Eyes" src={logoImage} className="h-10 w-auto" />
                                         <div className="text-xl/10 font-bold ml-2 hidden md:block">Social Eyes</div>
