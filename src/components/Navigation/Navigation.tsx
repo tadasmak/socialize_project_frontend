@@ -11,7 +11,7 @@ import ConfirmModal from '../ConfirmModal';
 import logoImage from '../../assets/branding/logo.png';
 
 const navigationItems = [
-    { name: 'Activities', href: '/', current: true },
+    { name: 'Activities', href: '/activities', current: true },
 ]
 
 export default function Navigation() {
