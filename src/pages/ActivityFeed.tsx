@@ -59,7 +59,7 @@ const ActivityFeed: React.FC = () => {
     }
 
     if (loading) return <div>Loading activities...</div>;
-    if (!activities?.length) return <div>No activities found.</div>;
+    if (!activities?.length) return <div>No activities found yet.</div>;
 
     return (
         <>

@@ -63,7 +63,7 @@ const Welcome = () => {
                         <h3 className="text-xl font-semibold text-coral-light mb-3">Chat & Confirm</h3>
                         <p className="text-gray-300">
                             Chat with participants before the event. Once an activity is confirmed,
-                            it locks a week before and becomes private, ensuring serious
+                            it locks and becomes private, ensuring serious
                             participation.
                         </p>
                     </div>
